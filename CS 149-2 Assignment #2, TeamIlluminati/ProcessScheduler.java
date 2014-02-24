@@ -40,7 +40,7 @@ public class ProcessScheduler {
 				time++;
 			}
 			double tempTime = time + current.getRunTime();
-			while(time < tempTime)
+			while(time < tempTime && time < 110)
 			{
 				timeChart[time] = current.getName();
 				time++;
