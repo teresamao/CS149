@@ -4,10 +4,10 @@ import java.util.Random;
 
 public class Process {
 	
-	public float arrivalTime;
-	public float runTime;
-	public int priority;
-	public int name; /** use int instead of char */
+	private float arrivalTime;
+	private float runTime;
+	private int priority;
+	private int name; /** use int instead of char */
 	
 	public Process(int name)
 	{
@@ -17,17 +17,29 @@ public class Process {
 		runTime = runTime/10;
 		priority = rnd.nextInt(4) + 1;
         this.name = name;
-	}
+    }
+//
+//	public void setName(char newName){
+//		name = newName;
+//	}
 
-//    public Process (int name) {
-//        this.name = name;
-//    }
+    public float getArrivalTime() {
+        return arrivalTime;
+    }
 
-	public void setName(char newName){
-		name = newName;
-	}
-	
-	
+    public float getRunTime() {
+        return runTime;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public int getName() {
+        return name;
+    }
+
+
 //	public void setSeed(int i){
 //		seed = seed + i;
 //	}
