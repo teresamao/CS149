@@ -11,39 +11,9 @@ public class ProcessScheduler {
         System.out.println(" ");
         Collections.sort(plist, ProcessComparators.arrivalTimeComparator);
         ProcessManager.printProcessList(plist);
+        fcfsTimeChart(plist);
 
 
-//		char name = 'a';
-//		Process[] processes = new Process[10];
-//		for(int i = 0; i < 10; i++){
-//			processes[i] = new Process();
-//			processes[i].setName(name);
-//			name++;
-//		}
-//
-//		processes = sortByArrival(processes);
-		
-//		ArrayList<Process> sortedProcess = new ArrayList<Process>();
-//		for(int i = 0; i < 10; i++)
-//		{
-//			sortedProcess.add(processes[i]);
-//		}
-		
-//		int waitingTime = 0;
-//		int time = 0;
-//		
-//		for(int i = 0; i < 10; i++)
-//		{
-//			waitingTime += waitingTime + processes[i].runTime;
-//			time += processes[i].runTime;
-//		}
-//
-//		for(int i = 0; i < 10; i++){
-//		System.out.println("Process Name: " + processes[i].name);
-//		System.out.println("Arrival Time: " + processes[i].arrivalTime);
-//		System.out.println("Run Time: " + processes[i].runTime);
-//		System.out.println("Priority: " + processes[i].priority);
-//		}
 	}
 	
 	public static Process[] sortByArrival(Process[] p){
@@ -57,9 +27,60 @@ public class ProcessScheduler {
 		return p;
 	}
 	
-	public static void timeChart(ArrayList<Process> p)
+	public static void fcfsTimeChart(ArrayList<Process> p)
 	{
-		
+		int[] timeChart = new int[110];
+		int time = 0;
+		while(!p.isEmpty())
+		{
+			Process current = p.remove(0);
+			while(current.getArrivalTime() > time)
+			{
+				timeChart[time] = 0;
+				time++;
+			}
+			double tempTime = time + current.getRunTime();
+			while(time < tempTime)
+			{
+				timeChart[time] = current.getName();
+				time++;
+			}	
+		}
+		for(int i = 0; i < timeChart.length; i++)
+			System.out.print(timeChart[i]);
 	}
 	
 }
+
+//old code
+//char name = 'a';
+//Process[] processes = new Process[10];
+//for(int i = 0; i < 10; i++){
+//	processes[i] = new Process();
+//	processes[i].setName(name);
+//	name++;
+//}
+//
+//processes = sortByArrival(processes);
+
+//ArrayList<Process> sortedProcess = new ArrayList<Process>();
+//for(int i = 0; i < 10; i++)
+//{
+//	sortedProcess.add(processes[i]);
+//}
+
+//int waitingTime = 0;
+//int time = 0;
+//
+//for(int i = 0; i < 10; i++)
+//{
+//	waitingTime += waitingTime + processes[i].runTime;
+//	time += processes[i].runTime;
+//}
+//
+//for(int i = 0; i < 10; i++){
+//System.out.println("Process Name: " + processes[i].name);
+//System.out.println("Arrival Time: " + processes[i].arrivalTime);
+//System.out.println("Run Time: " + processes[i].runTime);
+//System.out.println("Priority: " + processes[i].priority);
+//}

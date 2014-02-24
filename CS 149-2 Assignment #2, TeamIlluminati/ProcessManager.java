@@ -1,3 +1,5 @@
+//package cs149hw2;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +11,7 @@ public class ProcessManager {
 
     public static ArrayList<Process> generateProcesses(int count) {
         ArrayList<Process> list = new ArrayList<Process>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 1; i < count + 1; i++) {
             list.add(new Process(i));
         }
         return list;
