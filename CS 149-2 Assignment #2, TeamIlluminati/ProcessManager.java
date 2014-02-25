@@ -20,6 +20,7 @@ public class ProcessManager {
     public static void printProcessList(ArrayList<Process> list) {
         for (Process p : list)
             System.out.println(p.getName() + " " + p.getArrivalTime() + " " + p.getPriority() + " " + p.getRunTime());
+        System.out.println();
     }
 
 
