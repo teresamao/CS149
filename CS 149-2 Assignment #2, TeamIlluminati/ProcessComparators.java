@@ -17,6 +17,18 @@ public class ProcessComparators {
         }
     };
 
+    public static Comparator<Process> runtimeComparator = new Comparator<Process>() {
+        @Override
+        public int compare(Process p1, Process p2) {
+            if (p1.getRunTime() - p2.getRunTime() > 0)
+                return 1;
+            else if (p1.getRunTime() - p2.getRunTime() == 0)
+                return 0;
+            else
+                return -1;
+        }
+    };
+
     public static Comparator<Process> priorityComparator = new Comparator<Process>() {
         @Override
         public int compare(Process p1, Process p2) {
