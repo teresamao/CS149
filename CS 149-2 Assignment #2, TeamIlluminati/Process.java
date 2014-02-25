@@ -1,4 +1,5 @@
 //package cs149hw2;
+//test by minglu
 
 import java.util.Random;
 
