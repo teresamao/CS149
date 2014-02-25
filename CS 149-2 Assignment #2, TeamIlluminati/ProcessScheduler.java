@@ -6,7 +6,7 @@ import java.util.Collections;
 public class ProcessScheduler {
 	public static void main (String[] args){
 
-        ArrayList<Process> plist = ProcessManager.generateProcesses(50);
+        ArrayList<Process> plist = ProcessManager.generateProcesses(45);
         ProcessManager.printProcessList(plist);
 //        nonpreemptive(plist, "FCFS");
 //        nonpreemptive(plist, "SJF");
@@ -28,19 +28,21 @@ public class ProcessScheduler {
 			{
 				timeChart[time] = 0;
 				time++;
+			}	
+			int startTime = time;
+			double runTime = time + current.getRunTime();
+			if(startTime < 100){
+				while(time < runTime && time < 110)
+				{
+					timeChart[time] = current.getName();
+					time++;
+				}	
 			}
-            int startTime = time;
-            double runTime = time + current.getRunTime();
-            if(startTime < 100){
-                while(time < runTime && time < 110)
-                {
-                    timeChart[time] = current.getName();
-                    time++;
-                }   
-            }	
 		}
+		System.out.println("Time Chart:");
 		for(int i = 0; i < timeChart.length; i++)
-			System.out.print(timeChart[i]);
+			System.out.print(timeChart[i] + " ");
+		System.out.print("\n");
 	}
 
     public static void nonpreemptive(ArrayList<Process> list, String type) {
@@ -70,7 +72,7 @@ public class ProcessScheduler {
                 startTime = Math.ceil(finishTime);
             finishTime = startTime + p.getRunTime();
             totalWaitTime += startTime - p.getArrivalTime();
-            totalResponseTime = totalWaitTime;
+            totalResponseTime += startTime - p.getArrivalTime();
             totalTurnaroundTime += finishTime - p.getArrivalTime();
 //            System.out.println(p.getName() + " " + p.getArrivalTime() + " " + p.getRunTime());
 //            System.out.println(startTime + " " + finishTime);
@@ -78,6 +80,7 @@ public class ProcessScheduler {
             throughput++;
         }
         System.out.println(type);
+        System.out.println("Throughput : " + throughput);
         System.out.println("Average turnaround = " + (totalTurnaroundTime / throughput));
         System.out.println("Average waiting    = " + (totalWaitTime / throughput));
         System.out.println("Average response   = " + (totalResponseTime / throughput));
