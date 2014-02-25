@@ -39,6 +39,9 @@ public class Process {
         return name;
     }
 
+    public void setRunTime(double t) {
+        runTime = t;
+    }
 
 //	public void setSeed(int i){
 //		seed = seed + i;

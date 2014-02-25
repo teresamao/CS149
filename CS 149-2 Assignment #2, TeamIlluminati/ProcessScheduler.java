@@ -6,20 +6,18 @@ import java.util.Collections;
 public class ProcessScheduler {
 	public static void main (String[] args){
 
-<<<<<<< HEAD
-        ArrayList<Process> plist = ProcessManager.generateProcesses(30);
-
-
-=======
         ArrayList<Process> plist = ProcessManager.generateProcesses(45);
         ProcessManager.printProcessList(plist);
->>>>>>> ccedb3ef56ca876ec997d67e747b3419a4dd750f
+
 //        nonpreemptive(plist, "FCFS");
 //        nonpreemptive(plist, "SJF");
 //        nonpreemptive(plist, "HPF");
 
         nonpreemptive(plist, "HPF");
         fcfsTimeChart(plist);
+
+        plist = ProcessManager.generateProcesses(45);
+        SRT(plist);
 
 	}
 	
@@ -98,6 +96,67 @@ public class ProcessScheduler {
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 
+    }
+
+    public static void SRT(ArrayList<Process> list)
+    {
+        double time = 0;
+        double startTime = 0;
+        double finishTime = 0;
+        int throughput = 0;
+        double totalWaitTime = 0;
+        double totalTurnaroundTime = 0;
+        double totalResponseTime = 0;
+        
+        Collections.sort(list, ProcessComparators.runtimeComparator);
+        System.out.println();
+        ProcessManager.printProcessList(list);
+        
+        
+        while(finishTime < 100) {
+            
+        Collections.sort(list, ProcessComparators.runtimeComparator);
+            
+            //Choose the appropriate runtime.
+            Process current = list.get(0);
+            for (int i = 0; i < list.size() - 1; i++) {
+                if (current.getArrivalTime() > finishTime) {
+                    current = list.get(i + 1);
+                } else if (current.getRunTime() <= 0) {
+                    current = list.get(i + 1);
+                } else {
+                    i = list.size();
+                }
+            }
+            
+            //if all processes completed, finishtime=99. Reduce runtime by 1 since 1 quanta is passing.
+            if(current.getRunTime() == 0) {
+                finishTime = 99;
+            } else {
+                current.setRunTime(current.getRunTime()-1);
+            }
+            //if process runtime is less than 0, it has completed. increment throughput.
+            if(current.getRunTime() <= 0){
+                totalTurnaroundTime += finishTime - current.getArrivalTime();
+                throughput++;
+            }
+            finishTime++;
+        }
+        
+        System.out.println("Average Turnaround = " + (totalTurnaroundTime / throughput));
+//          Process p = list.remove(throughput);
+//            if (finishTime < p.getArrivalTime())
+//                startTime = Math.ceil(p.getArrivalTime());
+//            else
+//                startTime = Math.ceil(finishTime);
+//            if(p.getRunTime() < remainingRunTime)
+//            {
+//              time++;
+//              remainingRunTime = p.getRunTime() - 1;
+//              p.setRunTime(remainingRunTime);
+//            } 
+//            else
+                
     }
 }
 
