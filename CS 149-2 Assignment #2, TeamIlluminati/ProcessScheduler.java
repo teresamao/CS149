@@ -10,75 +10,95 @@ public class ProcessScheduler {
         ProcessManager.printProcessList(plist);
 
         FCFS(plist);
-        fcfsTimeChart(plist);
+//        fcfsTimeChart(plist);
 
         plist = ProcessManager.generateProcesses(45);
         SRT(plist);
 
 	}
 	
-	public static void fcfsTimeChart(ArrayList<Process> p)
-	{
-		int[] timeChart = new int[110];
-		int time = 0;
-		while(!p.isEmpty())
-		{
-			Process current = p.remove(0);
-			while(current.getArrivalTime() > time)
-			{
-				timeChart[time] = 0;
-				time++;
-			}	
-			int startTime = time;
-			double runTime = time + current.getRunTime();
-			if(startTime < 100){
-				while(time < runTime && time < 110)
-				{
-					timeChart[time] = current.getName();
-					time++;
-				}	
-			}
-		}
-		System.out.println("Time Chart:");
-		for(int i = 0; i < timeChart.length; i++)
-			System.out.print(timeChart[i] + " ");
-		System.out.print("\n");
-	}
+//	public static void fcfsTimeChart(ArrayList<Process> p)
+//	{
+//		int[] timeChart = new int[110];
+//		int time = 0;
+//		while(!p.isEmpty())
+//		{
+//			Process current = p.remove(0);
+//			while(current.getArrivalTime() > time)
+//			{
+//				timeChart[time] = 0;
+//				time++;
+//			}
+//			int startTime = time;
+//			double runTime = time + current.getRunTime();
+//			if(startTime < 100){
+//				while(time < runTime && time < 110)
+//				{
+//					timeChart[time] = current.getName();
+//					time++;
+//				}
+//			}
+//		}
+//		System.out.println("Time Chart:");
+//		for(int i = 0; i < timeChart.length; i++)
+//			System.out.print(timeChart[i] + " ");
+//		System.out.print("\n");
+//	}
 
-    public static void FCFS(ArrayList<Process> list) {
+    public static Data FCFS(ArrayList<Process> list) {
         double startTime = 0;
         double finishTime = 0;
-        int throughput = 0;
         double totalWaitTime = 0;
         double totalTurnaroundTime = 0;
         double totalResponseTime = 0;
+        double averageTurnaroundTime, averageWaitTime, averageResponseTime;
+        int throughput = 0;
+        String output = "FCFS";
 
         // sorts process list according to scheduling type
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 
-        ProcessManager.printProcessList(list); // print list sorted by arrival time.
+        // prints list sorted by arrival time
+        ProcessManager.printProcessList(list);
 
         // starts processing
         while (finishTime < 100) {
             Process p = list.get(throughput);
-            if (finishTime < p.getArrivalTime())
+
+            if (finishTime < p.getArrivalTime()) {
+
                 startTime = Math.ceil(p.getArrivalTime());
+
+                // prints 'idle'
+                int d = (int) Math.ceil(p.getArrivalTime() - finishTime);
+                for (int i = 0; i < d; i++)
+                    output += " idle";
+            }
             else
                 startTime = Math.ceil(finishTime);
+
             finishTime = startTime + p.getRunTime();
+
+            // prints current process
+            for (int i = 0; i < (int) Math.ceil(p.getRunTime()); i++)
+                output += (" P" + p.getName());
+
             totalWaitTime += startTime - p.getArrivalTime();
             totalResponseTime += startTime - p.getArrivalTime();
             totalTurnaroundTime += finishTime - p.getArrivalTime();
-//            System.out.println(p.getName() + " " + p.getArrivalTime() + " " + p.getRunTime());
-//            System.out.println(startTime + " " + finishTime);
-//            System.out.println(totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput + "\n");
             throughput++;
         }
-        System.out.println("FCFS");
+        averageTurnaroundTime = totalTurnaroundTime / throughput;
+        averageWaitTime = totalWaitTime / throughput;
+        averageResponseTime = totalResponseTime / throughput;
+
+        System.out.println(output);
         System.out.println("Throughput : " + throughput);
         System.out.println("Average turnaround = " + (totalTurnaroundTime / throughput));
         System.out.println("Average waiting    = " + (totalWaitTime / throughput));
         System.out.println("Average response   = " + (totalResponseTime / throughput));
+
+        return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
 
     public static void roundRobin(ArrayList<Process> list) {

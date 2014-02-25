@@ -12,7 +12,9 @@ public class ProcessManager {
     public static ArrayList<Process> generateProcesses(int count) {
         ArrayList<Process> list = new ArrayList<Process>();
         for (int i = 1; i < count + 1; i++) {
-            list.add(new Process(i));
+            if (i < 10)
+                list.add(new Process("0" + i));
+            list.add(new Process(new Integer(i).toString()));
         }
         return list;
     }

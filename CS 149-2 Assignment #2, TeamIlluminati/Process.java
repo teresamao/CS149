@@ -7,9 +7,9 @@ public class Process {
 	private double arrivalTime;
 	private double runTime;
 	private int priority;
-	private int name; /** use int instead of char */
+	private String name; /** use int instead of char */
 	
-	public Process(int name)
+	public Process(String name)
 	{
 		Random rnd = new Random();
 		arrivalTime = Math.ceil(rnd.nextFloat() * 99);
@@ -35,7 +35,7 @@ public class Process {
         return priority;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
