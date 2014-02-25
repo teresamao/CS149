@@ -9,11 +9,7 @@ public class ProcessScheduler {
         ArrayList<Process> plist = ProcessManager.generateProcesses(45);
         ProcessManager.printProcessList(plist);
 
-//        nonpreemptive(plist, "FCFS");
-//        nonpreemptive(plist, "SJF");
-//        nonpreemptive(plist, "HPF");
-
-        nonpreemptive(plist, "HPF");
+        FCFS(plist);
         fcfsTimeChart(plist);
 
         plist = ProcessManager.generateProcesses(45);
@@ -60,7 +56,7 @@ public class ProcessScheduler {
         // sorts process list according to scheduling type
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 
-        ProcessManager.printProcessList(list);
+        ProcessManager.printProcessList(list); // print list sorted by arrival time.
 
         // starts processing
         while (finishTime < 100) {
