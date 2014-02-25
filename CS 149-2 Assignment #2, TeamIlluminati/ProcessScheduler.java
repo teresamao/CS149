@@ -46,6 +46,7 @@ public class ProcessScheduler {
 //	}
 
     public static Data FCFS(ArrayList<Process> list) {
+
         double startTime = 0;
         double finishTime = 0;
         double totalWaitTime = 0;
@@ -103,7 +104,10 @@ public class ProcessScheduler {
 
     public static void roundRobin(ArrayList<Process> list) {
 
+        // sorts by arrival time
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
+
+
 
     }
 

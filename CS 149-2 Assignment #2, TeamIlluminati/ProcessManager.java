@@ -14,7 +14,8 @@ public class ProcessManager {
         for (int i = 1; i < count + 1; i++) {
             if (i < 10)
                 list.add(new Process("0" + i));
-            list.add(new Process(new Integer(i).toString()));
+            else
+                list.add(new Process(new Integer(i).toString()));
         }
         return list;
     }
