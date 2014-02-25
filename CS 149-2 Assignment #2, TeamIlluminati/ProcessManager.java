@@ -20,4 +20,6 @@ public class ProcessManager {
             System.out.println(p.getName() + " " + p.getArrivalTime() + " " + p.getPriority() + " " + p.getRunTime());
     }
 
+
+
 }

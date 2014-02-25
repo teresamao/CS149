@@ -4,6 +4,7 @@ import java.util.Comparator;
  * Created by maopeiyi on 2/24/14.
  */
 public class ProcessComparators {
+
     public static Comparator<Process> arrivalTimeComparator = new Comparator<Process>() {
         @Override
         public int compare(Process p1, Process p2) {
