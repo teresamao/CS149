@@ -6,13 +6,14 @@ import java.util.Collections;
 public class ProcessScheduler {
 	public static void main (String[] args){
 
-        ArrayList<Process> plist = ProcessManager.generateProcesses(50);
-        ProcessManager.printProcessList(plist);
+        ArrayList<Process> plist = ProcessManager.generateProcesses(30);
+
+
 //        nonpreemptive(plist, "FCFS");
 //        nonpreemptive(plist, "SJF");
 //        nonpreemptive(plist, "HPF");
 
-        nonpreemptive(plist, "FCFS");
+        nonpreemptive(plist, "HPF");
         fcfsTimeChart(plist);
 
 	}
@@ -58,6 +59,8 @@ public class ProcessScheduler {
         else
             return;
 
+        ProcessManager.printProcessList(list);
+
         // starts processing
         while (finishTime < 100) {
             Process p = list.get(throughput);
@@ -78,6 +81,12 @@ public class ProcessScheduler {
         System.out.println("Average turnaround = " + (totalTurnaroundTime / throughput));
         System.out.println("Average waiting    = " + (totalWaitTime / throughput));
         System.out.println("Average response   = " + (totalResponseTime / throughput));
+    }
+
+    public static void roundRobin(ArrayList<Process> list) {
+
+        Collections.sort(list, ProcessComparators.arrivalTimeComparator);
+
     }
 }
 
