@@ -29,12 +29,15 @@ public class ProcessScheduler {
 				timeChart[time] = 0;
 				time++;
 			}
-			double tempTime = time + current.getRunTime();
-			while(time < tempTime && time < 110)
-			{
-				timeChart[time] = current.getName();
-				time++;
-			}	
+            int startTime = time;
+            double runTime = time + current.getRunTime();
+            if(startTime < 100){
+                while(time < runTime && time < 110)
+                {
+                    timeChart[time] = current.getName();
+                    time++;
+                }   
+            }	
 		}
 		for(int i = 0; i < timeChart.length; i++)
 			System.out.print(timeChart[i]);
