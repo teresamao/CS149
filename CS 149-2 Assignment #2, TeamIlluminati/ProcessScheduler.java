@@ -51,7 +51,7 @@ public class ProcessScheduler {
 		System.out.print("\n");
 	}
 
-    public static void nonpreemptive(ArrayList<Process> list, String type) {
+    public static void FCFS(ArrayList<Process> list) {
         double startTime = 0;
         double finishTime = 0;
         int throughput = 0;
@@ -60,14 +60,7 @@ public class ProcessScheduler {
         double totalResponseTime = 0;
 
         // sorts process list according to scheduling type
-        if (type.equals("FCFS"))
-            Collections.sort(list, ProcessComparators.arrivalTimeComparator);
-        else if (type.equals("SJF"))
-            Collections.sort(list, ProcessComparators.runtimeComparator);
-        else if (type.equals("HPF"))
-            Collections.sort(list, ProcessComparators.priorityComparator);
-        else
-            return;
+        Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 
         ProcessManager.printProcessList(list);
 
@@ -87,7 +80,7 @@ public class ProcessScheduler {
 //            System.out.println(totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput + "\n");
             throughput++;
         }
-        System.out.println(type);
+        System.out.println("FCFS");
         System.out.println("Throughput : " + throughput);
         System.out.println("Average turnaround = " + (totalTurnaroundTime / throughput));
         System.out.println("Average waiting    = " + (totalWaitTime / throughput));
