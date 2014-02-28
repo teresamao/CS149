@@ -16,8 +16,8 @@ public class ProcessScheduler {
         nonpreemptiveHPF(plist);
         plist = ProcessManager.generateProcesses(45);
         RR(plist);
-//        plist = ProcessManager.generateProcesses(45);
-//        SRF(plist);
+        plist = ProcessManager.generateProcesses(45);
+        SRF(plist);
 
 	}
 
@@ -312,10 +312,11 @@ public class ProcessScheduler {
             int i = 0;
             boolean hasJob = false;
 
-            while (i < list.size() && currentTime >= list.get(i).getArrivalTime()) {
+            while (i < list.size() && list.get(i).getArrivalTime() <= currentTime) {
                 if (list.get(i).getRunTime() < list.get(currentJob).getRunTime())
                     currentJob = i;
                 hasJob = true;
+                i++;
             }
 
             if (hasJob) {
@@ -335,6 +336,8 @@ public class ProcessScheduler {
                     totalResponseTime += currentTime - p.getStartTime() + 1;
                     totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
                     throughput++;
+//                    System.out.println(totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput);
+
                 }
 
             }
