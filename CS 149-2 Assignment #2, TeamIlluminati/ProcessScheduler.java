@@ -235,11 +235,12 @@ public class ProcessScheduler {
         String output = "RR  ";
         int currentTime = 0;    // current time slot
         int currentJob = 0;
+        boolean done = false;
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 //        ProcessManager.printProcessList(list);
 
-        while (currentTime < 100) {
+        while (!done) {
 
             // no job in the queue currently
             if (currentTime < list.get(currentJob).getArrivalTime()) {
@@ -264,6 +265,7 @@ public class ProcessScheduler {
 
                 // current job has finished
                 if (p.getRunTime() <= 0) {
+
                     list.remove(currentJob);
 
                     // calculation
@@ -271,14 +273,23 @@ public class ProcessScheduler {
                     totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
                     totalWaitTime += currentTime - p.getArrivalTime() - p.getRunTime() + 1;
                     throughput++;
-//                    System.out.println(totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput);
+//                    System.out.println("here\n" + currentTime + " " + totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput);
+
+                    if (list.isEmpty())
+                        done = true;
                 }
 
                 currentJob++;
-                if (currentJob == list.size())
-                    currentJob = 0;
+
             }
             currentTime++;
+            if (currentTime == 100) {
+                for (int j = list.size() - 1; list.get(j).getStartTime() == -1; j--)
+                    list.remove(j);
+
+            }
+            if (currentJob >= list.size())
+                currentJob = 0;
         }
 
         averageTurnaroundTime = totalTurnaroundTime / throughput;
@@ -305,13 +316,17 @@ public class ProcessScheduler {
         String output = "SRF ";
         int currentTime = 0;    // current time slot
         int currentJob = 0;
+        boolean done = false;
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
         ProcessManager.printProcessList(list);
 
-        while (currentTime < 100) {
+
+
+        while (!done) {
 
             int i = 0;
+
             boolean hasJob = false;
 
             while (i < list.size() && list.get(i).getArrivalTime() <= currentTime) {
@@ -340,6 +355,8 @@ public class ProcessScheduler {
                     throughput++;
 //                    System.out.println(totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput);
 
+                    if (list.isEmpty())
+                        done = true;
                 }
 
             }
@@ -349,6 +366,10 @@ public class ProcessScheduler {
 
             currentJob = 0;
             currentTime++;
+            if (currentTime == 100) {
+                for (int j = list.size() - 1; list.get(j).getStartTime() == -1; j--)
+                    list.remove(j);
+            }
         }
 
 
