@@ -7,7 +7,9 @@ public class Process {
 	private double arrivalTime;
 	private double runTime;
 	private int priority;
-	private String name; /** use int instead of char */
+	private String name;
+    private int startTime;
+//    private int finishTime;
 	
 	public Process(String name)
 	{
@@ -17,6 +19,8 @@ public class Process {
 		runTime = runTime/10;
 		priority = rnd.nextInt(4) + 1;
         this.name = name;
+        startTime = 0;
+//        finishTime = 0;
     }
 //
 //	public void setName(char newName){
@@ -41,6 +45,14 @@ public class Process {
 
     public void setRunTime(double t) {
         runTime = t;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
     }
 
 //	public void setSeed(int i){
