@@ -6,11 +6,11 @@ public class Process {
 	
 	private double arrivalTime;
 	private double runTime;
+    private double originalRunTime;
 	private int priority;
 	private String name;
     private int startTime;
-    private int finishTime;
-	
+
 	public Process(String name)
 	{
 		Random rnd = new Random();
@@ -20,7 +20,7 @@ public class Process {
 		priority = rnd.nextInt(4) + 1;
         this.name = name;
         startTime = -1;
-        finishTime = -1;
+        originalRunTime = runTime;
     }
 //
 //	public void setName(char newName){
@@ -55,12 +55,12 @@ public class Process {
         this.startTime = startTime;
     }
 
-    public int getFinishTime() {
-        return finishTime;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
-    public void setFinishTime(int finishTime) {
-        this.finishTime = finishTime;
+    public double getOriginalRunTime() {
+        return originalRunTime;
     }
 
 //	public void setSeed(int i){
