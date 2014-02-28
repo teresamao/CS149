@@ -12,6 +12,8 @@ public class ProcessScheduler {
         SJF(plist);
         plist = ProcessManager.generateProcesses(45);
         nonpreemptiveHPF(plist);
+        plist = ProcessManager.generateProcesses(45);
+
 //        fcfsTimeChart(plist);
 
 //        plist = ProcessManager.generateProcesses(45);
@@ -153,10 +155,9 @@ public class ProcessScheduler {
         double averageTurnaroundTime;
         double averageWaitTime;
         double averageResponseTime;
-        String output = "SJF ";
+        String output = "HPF ";
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
-        ProcessManager.printProcessList(list);
 
         while (finishTime < 100) {
 
@@ -212,10 +213,9 @@ public class ProcessScheduler {
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
 
-    public static void roundRobin(ArrayList<Process> list) {
+    public static void RR(ArrayList<Process> list) {
 
-        // sorts by arrival time
-        Collections.sort(list, ProcessComparators.arrivalTimeComparator);
+
 
 
 
