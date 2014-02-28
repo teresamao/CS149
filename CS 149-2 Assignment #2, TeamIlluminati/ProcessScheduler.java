@@ -40,6 +40,14 @@ public class ProcessScheduler {
             Process p = list.get(throughput);
 
             if (finishTime < p.getArrivalTime()) {
+
+                // next process arrives after time 99 - stops
+                if (p.getArrivalTime() >= 100) {
+                    for (int i = 0; i < (100 - finishTime); i++)
+                        output += " idle";
+                    break;
+                }
+
                 startTime = Math.ceil(p.getArrivalTime());
 
                 // prints idle time slots
@@ -90,7 +98,7 @@ public class ProcessScheduler {
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 //        ProcessManager.printProcessList(list);
 
-        while (finishTime < 100) {
+        while (finishTime < 100  && startTime < 100) {
 
             Process p = null;
             int i = 0;
@@ -159,7 +167,7 @@ public class ProcessScheduler {
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 
-        while (finishTime < 100) {
+        while (finishTime < 100  && startTime < 100) {
 
             Process p = null;
             int i = 0;
@@ -215,10 +223,48 @@ public class ProcessScheduler {
 
     public static void RR(ArrayList<Process> list) {
 
+        int throughput = 0;
+        double startTime = 0;
+        double finishTime = 0;
+        double totalWaitTime = 0;
+        double totalTurnaroundTime = 0;
+        double totalResponseTime = 0;
+        double averageTurnaroundTime;
+        double averageWaitTime;
+        double averageResponseTime;
+        String output = "RR  ";
 
+        Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 
+        while (finishTime < 100 && startTime < 100) {
 
+            boolean hasJob = false;
+            int i = 0;
 
+            while (i < list.size() && list.get(i).getArrivalTime() <= startTime) {
+
+                if ()
+
+                i++;
+            }
+
+            if (!hasJob) {
+                startTime += 1;
+                output += " idle";
+            }
+        }
+
+        averageTurnaroundTime = totalTurnaroundTime / throughput;
+        averageWaitTime = totalWaitTime / throughput;
+        averageResponseTime = totalResponseTime / throughput;
+
+        System.out.println(output);
+        System.out.println("Throughput : " + throughput);
+        System.out.println("Average turnaround = " + averageTurnaroundTime);
+        System.out.println("Average waiting    = " + averageWaitTime);
+        System.out.println("Average response   = " + averageWaitTime + "\n");
+
+        return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
 
     public static void SRT(ArrayList<Process> list)
