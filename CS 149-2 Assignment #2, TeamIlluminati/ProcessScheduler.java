@@ -6,7 +6,9 @@ import java.util.Collections;
 public class ProcessScheduler {
 	public static void main (String[] args){
 
-        ArrayList<Process> plist = ProcessManager.generateProcesses(45);
+        ArrayList<Process> plist;
+
+        plist = ProcessManager.generateProcesses(45);
         FCFS(plist);
         plist = ProcessManager.generateProcesses(45);
         SJF(plist);
@@ -14,10 +16,8 @@ public class ProcessScheduler {
         nonpreemptiveHPF(plist);
         plist = ProcessManager.generateProcesses(45);
         RR(plist);
-//        fcfsTimeChart(plist);
-
 //        plist = ProcessManager.generateProcesses(45);
-//        SRT(plist);
+//        SRF(plist);
 
 	}
 
@@ -235,7 +235,7 @@ public class ProcessScheduler {
         int currentJob = 0;
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
-        ProcessManager.printProcessList(list);
+//        ProcessManager.printProcessList(list);
 
         while (currentTime < 100) {
 
@@ -253,10 +253,11 @@ public class ProcessScheduler {
                 // current hasn't been processed yet
                 if (p.getStartTime() == -1) {
                     p.setStartTime(currentTime);
-                    p.setRunTime(p.getRunTime() - 1);
+//                    p.setRunTime(p.getRunTime() - 1);
 //                    System.out.println(p.getRunTime());
                 }
 
+                p.setRunTime(p.getRunTime() - 1);
                 output += " P" + p.getName();
 
                 // current job has finished
@@ -291,65 +292,134 @@ public class ProcessScheduler {
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
 
-    public static void SRT(ArrayList<Process> list)
-    {
-        double time = 0;
-        double startTime = 0;
-        double finishTime = 0;
+    public static Data SRF(ArrayList<Process> list) {
         int throughput = 0;
         double totalWaitTime = 0;
         double totalTurnaroundTime = 0;
         double totalResponseTime = 0;
-        
-        Collections.sort(list, ProcessComparators.runtimeComparator);
-        System.out.println();
+        double averageTurnaroundTime;
+        double averageWaitTime;
+        double averageResponseTime;
+        String output = "SRF ";
+        int currentTime = 0;    // current time slot
+        int currentJob = 0;
+
+        Collections.sort(list, ProcessComparators.arrivalTimeComparator);
         ProcessManager.printProcessList(list);
-        
-        
-        while(finishTime < 100) {
-            
-        Collections.sort(list, ProcessComparators.runtimeComparator);
-            
-            //Choose the appropriate runtime.
-            Process current = list.get(0);
-            for (int i = 0; i < list.size() - 1; i++) {
-                if (current.getArrivalTime() > finishTime) {
-                    current = list.get(i + 1);
-                } else if (current.getRunTime() <= 0) {
-                    current = list.get(i + 1);
-                } else {
-                    i = list.size();
+
+        while (currentTime < 100) {
+
+            int i = 0;
+            boolean hasJob = false;
+
+            while (i < list.size() && currentTime >= list.get(i).getArrivalTime()) {
+                if (list.get(i).getRunTime() < list.get(currentJob).getRunTime())
+                    currentJob = i;
+                hasJob = true;
+            }
+
+            if (hasJob) {
+                Process p = list.get(currentJob);
+
+                if (p.getStartTime() == -1) {
+                    p.setStartTime(currentTime);
                 }
+
+                p.setRunTime(p.getRunTime() - 1);
+                output += " P" + p.getName();
+
+                if (p.getRunTime() <= 0) {
+                    list.remove(currentJob);
+
+                    totalWaitTime += p.getStartTime() - p.getArrivalTime();
+                    totalResponseTime += currentTime - p.getStartTime() + 1;
+                    totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
+                    throughput++;
+                }
+
             }
-            
-            //if all processes completed, finishtime=99. Reduce runtime by 1 since 1 quanta is passing.
-            if(current.getRunTime() == 0) {
-                finishTime = 99;
-            } else {
-                current.setRunTime(current.getRunTime()-1);
+            else {
+                output += " idle";
             }
-            //if process runtime is less than 0, it has completed. increment throughput.
-            if(current.getRunTime() <= 0){
-                totalTurnaroundTime += finishTime - current.getArrivalTime();
-                throughput++;
-            }
-            finishTime++;
+
+            currentJob = 0;
+            currentTime++;
         }
-        
-        System.out.println("Average Turnaround = " + (totalTurnaroundTime / throughput));
-//          Process p = list.remove(throughput);
-//            if (finishTime < p.getArrivalTime())
-//                startTime = Math.ceil(p.getArrivalTime());
-//            else
-//                startTime = Math.ceil(finishTime);
-//            if(p.getRunTime() < remainingRunTime)
-//            {
-//              time++;
-//              remainingRunTime = p.getRunTime() - 1;
-//              p.setRunTime(remainingRunTime);
-//            } 
-//            else
-                
+
+
+
+        averageTurnaroundTime = totalTurnaroundTime / throughput;
+        averageWaitTime = totalWaitTime / throughput;
+        averageResponseTime = totalResponseTime / throughput;
+
+        System.out.println(output);
+        System.out.println("Throughput : " + throughput);
+        System.out.println("Average turnaround = " + averageTurnaroundTime);
+        System.out.println("Average waiting    = " + averageWaitTime);
+        System.out.println("Average response   = " + averageResponseTime + "\n");
+
+        return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
+
+//    public static void SRT(ArrayList<Process> list)
+//    {
+//        double time = 0;
+//        double startTime = 0;
+//        double finishTime = 0;
+//        int throughput = 0;
+//        double totalWaitTime = 0;
+//        double totalTurnaroundTime = 0;
+//        double totalResponseTime = 0;
+//
+//        Collections.sort(list, ProcessComparators.runtimeComparator);
+//        System.out.println();
+//        ProcessManager.printProcessList(list);
+//
+//
+//        while(finishTime < 100) {
+//
+//        Collections.sort(list, ProcessComparators.runtimeComparator);
+//
+//            //Choose the appropriate runtime.
+//            Process current = list.get(0);
+//            for (int i = 0; i < list.size() - 1; i++) {
+//                if (current.getArrivalTime() > finishTime) {
+//                    current = list.get(i + 1);
+//                } else if (current.getRunTime() <= 0) {
+//                    current = list.get(i + 1);
+//                } else {
+//                    i = list.size();
+//                }
+//            }
+//
+//            //if all processes completed, finishtime=99. Reduce runtime by 1 since 1 quanta is passing.
+//            if(current.getRunTime() == 0) {
+//                finishTime = 99;
+//            } else {
+//                current.setRunTime(current.getRunTime()-1);
+//            }
+//            //if process runtime is less than 0, it has completed. increment throughput.
+//            if(current.getRunTime() <= 0){
+//                totalTurnaroundTime += finishTime - current.getArrivalTime();
+//                throughput++;
+//            }
+//            finishTime++;
+//        }
+//
+//        System.out.println("Average Turnaround = " + (totalTurnaroundTime / throughput));
+////          Process p = list.remove(throughput);
+////            if (finishTime < p.getArrivalTime())
+////                startTime = Math.ceil(p.getArrivalTime());
+////            else
+////                startTime = Math.ceil(finishTime);
+////            if(p.getRunTime() < remainingRunTime)
+////            {
+////              time++;
+////              remainingRunTime = p.getRunTime() - 1;
+////              p.setRunTime(remainingRunTime);
+////            }
+////            else
+//
+//    }
 }
 
