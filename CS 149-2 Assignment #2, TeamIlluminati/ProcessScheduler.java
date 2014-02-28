@@ -7,44 +7,17 @@ public class ProcessScheduler {
 	public static void main (String[] args){
 
         ArrayList<Process> plist = ProcessManager.generateProcesses(45);
-//        ProcessManager.printProcessList(plist);
-
         FCFS(plist);
+        plist = ProcessManager.generateProcesses(45);
         SJF(plist);
+        plist = ProcessManager.generateProcesses(45);
+        nonpreemptiveHPF(plist);
 //        fcfsTimeChart(plist);
 
 //        plist = ProcessManager.generateProcesses(45);
 //        SRT(plist);
 
 	}
-	
-//	public static void fcfsTimeChart(ArrayList<Process> p)
-//	{
-//		int[] timeChart = new int[110];
-//		int time = 0;
-//		while(!p.isEmpty())
-//		{
-//			Process current = p.remove(0);
-//			while(current.getArrivalTime() > time)
-//			{
-//				timeChart[time] = 0;
-//				time++;
-//			}
-//			int startTime = time;
-//			double runTime = time + current.getRunTime();
-//			if(startTime < 100){
-//				while(time < runTime && time < 110)
-//				{
-//					timeChart[time] = current.getName();
-//					time++;
-//				}
-//			}
-//		}
-//		System.out.println("Time Chart:");
-//		for(int i = 0; i < timeChart.length; i++)
-//			System.out.print(timeChart[i] + " ");
-//		System.out.print("\n");
-//	}
 
     public static Data FCFS(ArrayList<Process> list) {
 
@@ -94,7 +67,7 @@ public class ProcessScheduler {
         System.out.println("Throughput : " + throughput);
         System.out.println("Average turnaround = " + averageTurnaroundTime);
         System.out.println("Average waiting    = " + averageWaitTime);
-        System.out.println("Average response   = " + averageWaitTime);
+        System.out.println("Average response   = " + averageWaitTime + "\n");
 
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
@@ -113,8 +86,7 @@ public class ProcessScheduler {
         String output = "SJF ";
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
-
-        ProcessManager.printProcessList(list);
+//        ProcessManager.printProcessList(list);
 
         while (finishTime < 100) {
 
@@ -165,7 +137,77 @@ public class ProcessScheduler {
         System.out.println("Throughput : " + throughput);
         System.out.println("Average turnaround = " + averageTurnaroundTime);
         System.out.println("Average waiting    = " + averageWaitTime);
-        System.out.println("Average response   = " + averageWaitTime);
+        System.out.println("Average response   = " + averageWaitTime + "\n");
+
+        return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
+    }
+
+    public static Data nonpreemptiveHPF(ArrayList<Process> list) {
+
+        int throughput = 0;
+        double startTime = 0;
+        double finishTime = 0;
+        double totalWaitTime = 0;
+        double totalTurnaroundTime = 0;
+        double totalResponseTime = 0;
+        double averageTurnaroundTime;
+        double averageWaitTime;
+        double averageResponseTime;
+        String output = "SJF ";
+
+        Collections.sort(list, ProcessComparators.arrivalTimeComparator);
+        ProcessManager.printProcessList(list);
+
+        while (finishTime < 100) {
+
+            Process p = null;
+            int i = 0;
+            int highestPriorityJob = list.get(0).getPriority();
+            boolean hasJob = false;
+
+            while (i < list.size() && list.get(i).getArrivalTime() <= startTime) {
+                if (list.get(highestPriorityJob).getPriority() > list.get(i).getPriority())
+                    highestPriorityJob = i;
+                hasJob = true;
+                i++;
+            }
+
+            if (hasJob) {   // shortest job found
+
+                // retrieve current process from the queue
+                p = list.get(highestPriorityJob);
+                list.remove(highestPriorityJob);
+
+                finishTime = startTime + p.getRunTime();
+
+                // print current process
+                for (int j = 0; j < (int) Math.ceil(p.getRunTime()); j++)
+                    output += (" P" + p.getName());
+
+                // calculation
+                totalWaitTime += startTime - p.getArrivalTime();
+                totalResponseTime += startTime - p.getArrivalTime();
+                totalTurnaroundTime += finishTime - p.getArrivalTime();
+                throughput++;
+
+                startTime = finishTime; // update startTime for next iteration
+
+            }
+            else {  // no job in the queue currently
+                startTime += 1;
+                output += " idle";
+            }
+        }
+
+        averageTurnaroundTime = totalTurnaroundTime / throughput;
+        averageWaitTime = totalWaitTime / throughput;
+        averageResponseTime = totalResponseTime / throughput;
+
+        System.out.println(output);
+        System.out.println("Throughput : " + throughput);
+        System.out.println("Average turnaround = " + averageTurnaroundTime);
+        System.out.println("Average waiting    = " + averageWaitTime);
+        System.out.println("Average response   = " + averageWaitTime + "\n");
 
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
