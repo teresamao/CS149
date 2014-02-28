@@ -9,7 +9,7 @@ public class Process {
 	private int priority;
 	private String name;
     private int startTime;
-//    private int finishTime;
+    private int finishTime;
 	
 	public Process(String name)
 	{
@@ -19,8 +19,8 @@ public class Process {
 		runTime = runTime/10;
 		priority = rnd.nextInt(4) + 1;
         this.name = name;
-        startTime = 0;
-//        finishTime = 0;
+        startTime = -1;
+        finishTime = -1;
     }
 //
 //	public void setName(char newName){
@@ -53,6 +53,14 @@ public class Process {
 
     public void setStartTime(int startTime) {
         this.startTime = startTime;
+    }
+
+    public int getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(int finishTime) {
+        this.finishTime = finishTime;
     }
 
 //	public void setSeed(int i){
