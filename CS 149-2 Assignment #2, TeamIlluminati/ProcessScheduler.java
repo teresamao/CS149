@@ -18,6 +18,8 @@ public class ProcessScheduler {
         RR(plist);
         plist = ProcessManager.generateProcesses(45);
         SRF(plist);
+        plist = ProcessManager.generateProcesses(45);
+        preemptiveHPF(plist);
 
 	}
 
@@ -265,9 +267,9 @@ public class ProcessScheduler {
                     list.remove(currentJob);
 
                     // calculation
-                    totalWaitTime += p.getStartTime() - p.getArrivalTime();
                     totalResponseTime += currentTime - p.getStartTime() + 1;
                     totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
+                    totalWaitTime += currentTime - p.getArrivalTime() - p.getRunTime() + 1;
                     throughput++;
 //                    System.out.println(totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput);
                 }
@@ -332,7 +334,7 @@ public class ProcessScheduler {
                 if (p.getRunTime() <= 0) {
                     list.remove(currentJob);
 
-                    totalWaitTime += p.getStartTime() - p.getArrivalTime();
+                    totalWaitTime += currentTime - p.getArrivalTime() - p.getRunTime() + 1;
                     totalResponseTime += currentTime - p.getStartTime() + 1;
                     totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
                     throughput++;
@@ -364,65 +366,30 @@ public class ProcessScheduler {
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
 
-//    public static void SRT(ArrayList<Process> list)
-//    {
-//        double time = 0;
-//        double startTime = 0;
-//        double finishTime = 0;
-//        int throughput = 0;
-//        double totalWaitTime = 0;
-//        double totalTurnaroundTime = 0;
-//        double totalResponseTime = 0;
-//
-//        Collections.sort(list, ProcessComparators.runtimeComparator);
-//        System.out.println();
-//        ProcessManager.printProcessList(list);
-//
-//
-//        while(finishTime < 100) {
-//
-//        Collections.sort(list, ProcessComparators.runtimeComparator);
-//
-//            //Choose the appropriate runtime.
-//            Process current = list.get(0);
-//            for (int i = 0; i < list.size() - 1; i++) {
-//                if (current.getArrivalTime() > finishTime) {
-//                    current = list.get(i + 1);
-//                } else if (current.getRunTime() <= 0) {
-//                    current = list.get(i + 1);
-//                } else {
-//                    i = list.size();
-//                }
-//            }
-//
-//            //if all processes completed, finishtime=99. Reduce runtime by 1 since 1 quanta is passing.
-//            if(current.getRunTime() == 0) {
-//                finishTime = 99;
-//            } else {
-//                current.setRunTime(current.getRunTime()-1);
-//            }
-//            //if process runtime is less than 0, it has completed. increment throughput.
-//            if(current.getRunTime() <= 0){
-//                totalTurnaroundTime += finishTime - current.getArrivalTime();
-//                throughput++;
-//            }
-//            finishTime++;
-//        }
-//
-//        System.out.println("Average Turnaround = " + (totalTurnaroundTime / throughput));
-////          Process p = list.remove(throughput);
-////            if (finishTime < p.getArrivalTime())
-////                startTime = Math.ceil(p.getArrivalTime());
-////            else
-////                startTime = Math.ceil(finishTime);
-////            if(p.getRunTime() < remainingRunTime)
-////            {
-////              time++;
-////              remainingRunTime = p.getRunTime() - 1;
-////              p.setRunTime(remainingRunTime);
-////            }
-////            else
-//
-//    }
+    public static Data preemptiveHPF(ArrayList<Process> list) {
+
+        ArrayList<ArrayList<Process>> priorityQueues = new ArrayList<ArrayList<Process>>();
+
+        for (int i = 0; i < 4; i++)
+            priorityQueues.add(new ArrayList<Process>());
+        for (Process p : list)
+            priorityQueues.get(p.getPriority() - 1).add(p);
+        for (int i = 0; i < 4; i++)
+            Collections.sort(priorityQueues.get(i), ProcessComparators.arrivalTimeComparator);
+
+        int throughput = 0;
+        double totalWaitTime = 0;
+        double totalTurnaroundTime = 0;
+        double totalResponseTime = 0;
+        double averageTurnaroundTime;
+        double averageWaitTime;
+        double averageResponseTime;
+        String output = "HPF ";
+        int currentTime = 0;    // current time slot
+        int currentJob = 0;
+
+
+        return new Data();
+    }
 }
 

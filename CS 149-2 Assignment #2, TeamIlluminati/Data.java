@@ -7,6 +7,8 @@ public class Data {
     private double averageResponse;
     private int throughput;
 
+    public Data () {}
+
     public Data(double averageTurnaround, double averageWaiting, double averageResponse, int throughput) {
         this.averageTurnaround = averageTurnaround;
         this.averageWaiting = averageWaiting;
