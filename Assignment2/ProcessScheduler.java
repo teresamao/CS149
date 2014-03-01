@@ -112,7 +112,7 @@ public class ProcessScheduler {
             for (int i = 0; i < (int) Math.ceil(p.getRunTime()); i++)
                 output += ("  P" + p.getName());
 
-            totalWaitTime += startTime - p.getArrivalTime();
+        	totalWaitTime += finishTime - p.getArrivalTime() - p.getRunTime();
             totalResponseTime += startTime - p.getArrivalTime();
             totalTurnaroundTime += finishTime - p.getArrivalTime();
             throughput++;
@@ -172,13 +172,12 @@ public class ProcessScheduler {
                     output += ("  P" + p.getName());
 
                 // calculation
-                totalWaitTime += startTime - p.getArrivalTime();
+                totalWaitTime += finishTime - p.getArrivalTime() - p.getRunTime();
                 totalResponseTime += startTime - p.getArrivalTime();
                 totalTurnaroundTime += finishTime - p.getArrivalTime();
                 throughput++;
 
                 startTime = finishTime; // update startTime for next iteration
-
             }
             else {  // no job in the queue currently
                 startTime += 1;
@@ -241,7 +240,7 @@ public class ProcessScheduler {
                     output += ("  P" + p.getName());
 
                 // calculation
-                totalWaitTime += startTime - p.getArrivalTime();
+                totalWaitTime += finishTime - p.getArrivalTime() - p.getRunTime();
                 totalResponseTime += startTime - p.getArrivalTime();
                 totalTurnaroundTime += finishTime - p.getArrivalTime();
                 throughput++;
@@ -311,9 +310,9 @@ public class ProcessScheduler {
                     list.remove(currentJob);
 
                     // calculation
-                    totalResponseTime += currentTime - p.getStartTime() + 1;
-                    totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
-                    totalWaitTime += currentTime - p.getArrivalTime() - p.getOriginalRunTime() + 1;
+                    totalResponseTime += p.getStartTime() - p.getArrivalTime();
+                    totalTurnaroundTime += currentTime - p.getArrivalTime();
+                    totalWaitTime += currentTime - p.getArrivalTime() - p.getOriginalRunTime();
                     throughput++;
 
                     if (list.isEmpty())
@@ -387,9 +386,9 @@ public class ProcessScheduler {
                 if (p.getRunTime() <= 0) {
                     list.remove(currentJob);
 
-                    totalWaitTime += currentTime - p.getArrivalTime() - p.getOriginalRunTime() + 1;
-                    totalResponseTime += currentTime - p.getStartTime() + 1;
-                    totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
+                    totalResponseTime += p.getStartTime() - p.getArrivalTime();
+                    totalTurnaroundTime += currentTime - p.getArrivalTime();
+                    totalWaitTime += currentTime - p.getArrivalTime() - p.getOriginalRunTime();
                     throughput++;
 
                     if (list.isEmpty())
@@ -481,10 +480,10 @@ public class ProcessScheduler {
 
                         list.remove(currentJob);
 
-                        totalWaitTime += currentTime - p.getArrivalTime() - p.getOriginalRunTime() + 1;
-                        totalResponseTime += currentTime - p.getStartTime() + 1;
-                        totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
-                        throughput++;
+                        totalResponseTime += p.getStartTime() - p.getArrivalTime();
+	                    totalTurnaroundTime += currentTime - p.getArrivalTime();
+	                    totalWaitTime += currentTime - p.getArrivalTime() - p.getOriginalRunTime();
+	                    throughput++;
                     }
 
                     // search for next process
