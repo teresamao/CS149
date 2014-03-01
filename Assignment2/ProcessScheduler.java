@@ -37,7 +37,7 @@ public class ProcessScheduler {
         dataList.clear();
         for (int i = 0; i < 5; i++) {
             plist = ProcessManager.generateProcesses(45);
-            nonpreemptiveHPF(plist);
+            dataList.add(nonpreemptiveHPF(plist));
         }
         calculation(dataList);
 
@@ -144,7 +144,6 @@ public class ProcessScheduler {
         String output = "SJF     ";
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
-//        ProcessManager.printProcessList(list);
 
         while (finishTime < 100  && startTime < 100) {
 
@@ -284,7 +283,6 @@ public class ProcessScheduler {
         boolean done = false;
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
-//        ProcessManager.printProcessList(list);
 
         while (!done) {
 
@@ -317,7 +315,6 @@ public class ProcessScheduler {
                     totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
                     totalWaitTime += currentTime - p.getArrivalTime() - p.getOriginalRunTime() + 1;
                     throughput++;
-//                    System.out.println("here\n" + currentTime + " " + totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput);
 
                     if (list.isEmpty())
                         done = true;
