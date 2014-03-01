@@ -1,5 +1,3 @@
-//package cs149hw2;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,23 +5,69 @@ public class ProcessScheduler {
 	public static void main (String[] args){
 
         ArrayList<Process> plist;
+        ArrayList<Data> dataList = new ArrayList<Data>();
 
-        plist = ProcessManager.generateProcesses(45);
-        FCFS(plist);
-        plist = ProcessManager.generateProcesses(45);
-        SJF(plist);
-        plist = ProcessManager.generateProcesses(45);
-        nonpreemptiveHPF(plist);
-        plist = ProcessManager.generateProcesses(45);
-        RR(plist);
-        plist = ProcessManager.generateProcesses(45);
-        SRF(plist);
         for (int i = 0; i < 5; i++) {
             plist = ProcessManager.generateProcesses(45);
-            preemptiveHPF(plist);
+            dataList.add(FCFS(plist));
         }
+        calculation(dataList);
+
+        dataList.clear();
+        for (int i = 0; i < 5; i++) {
+            plist = ProcessManager.generateProcesses(45);
+            dataList.add(SJF(plist));
+        }
+        calculation(dataList);
+
+        dataList.clear();
+        for (int i = 0; i < 5; i++) {
+            plist = ProcessManager.generateProcesses(45);
+            dataList.add(RR(plist));
+        }
+        calculation(dataList);
+
+        dataList.clear();
+        for (int i = 0; i < 5; i++) {
+            plist = ProcessManager.generateProcesses(45);
+            dataList.add(SRF(plist));
+        }
+        calculation(dataList);
+
+        dataList.clear();
+        for (int i = 0; i < 5; i++) {
+            plist = ProcessManager.generateProcesses(45);
+            nonpreemptiveHPF(plist);
+        }
+        calculation(dataList);
+
+        dataList.clear();
+        for (int i = 0; i < 5; i++) {
+            plist = ProcessManager.generateProcesses(45);
+            dataList.add(preemptiveHPF(plist));
+        }
+        calculation(dataList);
 
 	}
+
+    public static void calculation(ArrayList<Data> list) {
+        int throughput = 0;
+        double totalRespondTime = 0;
+        double totalWaitTime = 0;
+        double totalTurnaroundTime = 0;
+
+        for (Data d : list) {
+            throughput += d.getThroughput();
+            totalRespondTime += d.getAverageResponse() * d.getThroughput();
+            totalWaitTime += d.getAverageWaiting() * d.getThroughput();
+            totalTurnaroundTime += d.getAverageTurnaround() * d.getThroughput();
+        }
+
+        System.out.println("\nThroughput : " + throughput);
+        System.out.println("Average turnaround = " + totalTurnaroundTime / throughput);
+        System.out.println("Average waiting    = " + totalWaitTime / throughput);
+        System.out.println("Average response   = " + totalRespondTime / throughput + "\n");
+    }
 
     public static Data FCFS(ArrayList<Process> list) {
 
@@ -34,7 +78,7 @@ public class ProcessScheduler {
         double totalResponseTime = 0;
         double averageTurnaroundTime, averageWaitTime, averageResponseTime;
         int throughput = 0;
-        String output = "FCFS";
+        String output = "FCFS    ";
 
         // sorts process list according to scheduling type
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
@@ -66,7 +110,7 @@ public class ProcessScheduler {
 
             // prints current process
             for (int i = 0; i < (int) Math.ceil(p.getRunTime()); i++)
-                output += (" P" + p.getName());
+                output += ("  P" + p.getName());
 
             totalWaitTime += startTime - p.getArrivalTime();
             totalResponseTime += startTime - p.getArrivalTime();
@@ -77,11 +121,11 @@ public class ProcessScheduler {
         averageWaitTime = totalWaitTime / throughput;
         averageResponseTime = totalResponseTime / throughput;
 
+        output += "\tthroughput = " + throughput
+                + "\taverageWaitTime = " + averageWaitTime
+                + "\taverageResponseTime = " + averageResponseTime
+                + "\taverageTurnarountTime = " + averageTurnaroundTime;
         System.out.println(output);
-        System.out.println("Throughput : " + throughput);
-        System.out.println("Average turnaround = " + averageTurnaroundTime);
-        System.out.println("Average waiting    = " + averageWaitTime);
-        System.out.println("Average response   = " + averageWaitTime + "\n");
 
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
@@ -97,7 +141,7 @@ public class ProcessScheduler {
         double averageTurnaroundTime;
         double averageWaitTime;
         double averageResponseTime;
-        String output = "SJF ";
+        String output = "SJF     ";
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 //        ProcessManager.printProcessList(list);
@@ -126,7 +170,7 @@ public class ProcessScheduler {
 
                 // print current process
                 for (int j = 0; j < (int) Math.ceil(p.getRunTime()); j++)
-                    output += (" P" + p.getName());
+                    output += ("  P" + p.getName());
 
                 // calculation
                 totalWaitTime += startTime - p.getArrivalTime();
@@ -147,11 +191,11 @@ public class ProcessScheduler {
         averageWaitTime = totalWaitTime / throughput;
         averageResponseTime = totalResponseTime / throughput;
 
+        output += "\tthroughput = " + throughput
+                + "\taverageWaitTime = " + averageWaitTime
+                + "\taverageResponseTime = " + averageResponseTime
+                + "\taverageTurnarountTime = " + averageTurnaroundTime;
         System.out.println(output);
-        System.out.println("Throughput : " + throughput);
-        System.out.println("Average turnaround = " + averageTurnaroundTime);
-        System.out.println("Average waiting    = " + averageWaitTime);
-        System.out.println("Average response   = " + averageWaitTime + "\n");
 
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
@@ -167,7 +211,7 @@ public class ProcessScheduler {
         double averageTurnaroundTime;
         double averageWaitTime;
         double averageResponseTime;
-        String output = "HPF ";
+        String output = "HPF(NP) ";
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
 
@@ -195,7 +239,7 @@ public class ProcessScheduler {
 
                 // print current process
                 for (int j = 0; j < (int) Math.ceil(p.getRunTime()); j++)
-                    output += (" P" + p.getName());
+                    output += ("  P" + p.getName());
 
                 // calculation
                 totalWaitTime += startTime - p.getArrivalTime();
@@ -216,11 +260,11 @@ public class ProcessScheduler {
         averageWaitTime = totalWaitTime / throughput;
         averageResponseTime = totalResponseTime / throughput;
 
+        output += "\tthroughput = " + throughput
+                + "\taverageWaitTime = " + averageWaitTime
+                + "\taverageResponseTime = " + averageResponseTime
+                + "\taverageTurnarountTime = " + averageTurnaroundTime;
         System.out.println(output);
-        System.out.println("Throughput : " + throughput);
-        System.out.println("Average turnaround = " + averageTurnaroundTime);
-        System.out.println("Average waiting    = " + averageWaitTime);
-        System.out.println("Average response   = " + averageWaitTime + "\n");
 
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
@@ -234,7 +278,7 @@ public class ProcessScheduler {
         double averageTurnaroundTime;
         double averageWaitTime;
         double averageResponseTime;
-        String output = "RR  ";
+        String output = "RR      ";
         int currentTime = 0;    // current time slot
         int currentJob = 0;
         boolean done = false;
@@ -261,7 +305,7 @@ public class ProcessScheduler {
                 }
 
                 p.setRunTime(p.getRunTime() - 1);
-                output += " P" + p.getName();
+                output += "  P" + p.getName();
 
                 // current job has finished
                 if (p.getRunTime() <= 0) {
@@ -296,11 +340,11 @@ public class ProcessScheduler {
         averageWaitTime = totalWaitTime / throughput;
         averageResponseTime = totalResponseTime / throughput;
 
+        output += "\tthroughput = " + throughput
+                + "\taverageWaitTime = " + averageWaitTime
+                + "\taverageResponseTime = " + averageResponseTime
+                + "\taverageTurnarountTime = " + averageTurnaroundTime;
         System.out.println(output);
-        System.out.println("Throughput : " + throughput);
-        System.out.println("Average turnaround = " + averageTurnaroundTime);
-        System.out.println("Average waiting    = " + averageWaitTime);
-        System.out.println("Average response   = " + averageResponseTime + "\n");
 
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
@@ -313,7 +357,7 @@ public class ProcessScheduler {
         double averageTurnaroundTime;
         double averageWaitTime;
         double averageResponseTime;
-        String output = "SRF ";
+        String output = "SRF     ";
         int currentTime = 0;    // current time slot
         int currentJob = 0;
         boolean done = false;
@@ -341,7 +385,7 @@ public class ProcessScheduler {
                 }
 
                 p.setRunTime(p.getRunTime() - 1);
-                output += " P" + p.getName();
+                output += "  P" + p.getName();
 
                 if (p.getRunTime() <= 0) {
                     list.remove(currentJob);
@@ -363,8 +407,9 @@ public class ProcessScheduler {
             currentJob = 0;
             currentTime++;
             if (currentTime == 100) {
-                for (int j = list.size() - 1; list.get(j).getStartTime() == -1; j--)
+                for (int j = list.size() - 1; list.get(j).getStartTime() == -1 && j > 0; j--){
                     list.remove(j);
+                }
             }
         }
 
@@ -372,11 +417,11 @@ public class ProcessScheduler {
         averageWaitTime = totalWaitTime / throughput;
         averageResponseTime = totalResponseTime / throughput;
 
+        output += "\tthroughput = " + throughput
+                + "\taverageWaitTime = " + averageWaitTime
+                + "\taverageResponseTime = " + averageResponseTime
+                + "\taverageTurnarountTime = " + averageTurnaroundTime;
         System.out.println(output);
-        System.out.println("Throughput : " + throughput);
-        System.out.println("Average turnaround = " + averageTurnaroundTime);
-        System.out.println("Average waiting    = " + averageWaitTime);
-        System.out.println("Average response   = " + averageResponseTime + "\n");
 
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
@@ -390,7 +435,7 @@ public class ProcessScheduler {
         double averageTurnaroundTime;
         double averageWaitTime;
         double averageResponseTime;
-        String output = "HPF ";
+        String output = "HPF(P)  ";
         int currentTime = 0;
         int startAt;
         boolean done = false;
@@ -421,7 +466,7 @@ public class ProcessScheduler {
 
                     Process p = list.get(currentJob);
                     p.setRunTime(p.getRunTime() - 1);
-                    output += " P" + p.getName();
+                    output += "  P" + p.getName();
 
                     // current job has not yet started
                     if (list.get(currentJob).getStartTime() == -1) {
@@ -484,11 +529,11 @@ public class ProcessScheduler {
         averageWaitTime = totalWaitTime / throughput;
         averageResponseTime = totalResponseTime / throughput;
 
+        output += "\tthroughput = " + throughput
+                + "\taverageWaitTime = " + averageWaitTime
+                + "\taverageResponseTime = " + averageResponseTime
+                + "\taverageTurnarountTime = " + averageTurnaroundTime;
         System.out.println(output);
-        System.out.println("Throughput : " + throughput);
-        System.out.println("Average turnaround = " + averageTurnaroundTime);
-        System.out.println("Average waiting    = " + averageWaitTime);
-        System.out.println("Average response   = " + averageResponseTime + "\n");
 
         return new Data(averageTurnaroundTime, averageWaitTime, averageResponseTime, throughput);
     }
