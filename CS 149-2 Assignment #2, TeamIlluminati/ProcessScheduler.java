@@ -8,18 +8,20 @@ public class ProcessScheduler {
 
         ArrayList<Process> plist;
 
-//        plist = ProcessManager.generateProcesses(45);
-//        FCFS(plist);
-//        plist = ProcessManager.generateProcesses(45);
-//        SJF(plist);
-//        plist = ProcessManager.generateProcesses(45);
-//        nonpreemptiveHPF(plist);
-//        plist = ProcessManager.generateProcesses(45);
-//        RR(plist);
-//        plist = ProcessManager.generateProcesses(45);
-//        SRF(plist);
         plist = ProcessManager.generateProcesses(45);
-        preemptiveHPF(plist);
+        FCFS(plist);
+        plist = ProcessManager.generateProcesses(45);
+        SJF(plist);
+        plist = ProcessManager.generateProcesses(45);
+        nonpreemptiveHPF(plist);
+        plist = ProcessManager.generateProcesses(45);
+        RR(plist);
+        plist = ProcessManager.generateProcesses(45);
+        SRF(plist);
+        for (int i = 0; i < 5; i++) {
+            plist = ProcessManager.generateProcesses(45);
+            preemptiveHPF(plist);
+        }
 
 	}
 
@@ -317,7 +319,6 @@ public class ProcessScheduler {
         boolean done = false;
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
-        ProcessManager.printProcessList(list);
 
         while (!done) {
 
@@ -349,7 +350,6 @@ public class ProcessScheduler {
                     totalResponseTime += currentTime - p.getStartTime() + 1;
                     totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
                     throughput++;
-//                    System.out.println(totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput);
 
                     if (list.isEmpty())
                         done = true;
@@ -367,8 +367,6 @@ public class ProcessScheduler {
                     list.remove(j);
             }
         }
-
-
 
         averageTurnaroundTime = totalTurnaroundTime / throughput;
         averageWaitTime = totalWaitTime / throughput;
@@ -393,84 +391,90 @@ public class ProcessScheduler {
         double averageWaitTime;
         double averageResponseTime;
         String output = "HPF ";
-        int currentTime = 0;    // current time slot
-        int startAt, endAt; // first and last index of current processing jobs
+        int currentTime = 0;
+        int startAt;
         boolean done = false;
 
+        // list sorted by both arrival time and priority
         Collections.sort(list, ProcessComparators.arrivalTimeComparatorForSamePriority);
-        ProcessManager.printProcessList(list);
 
         while (!done) {
 
-            // set startAt and endAt index
+            // searches for arrived job with highest priority
             startAt = -1;
-            for (int i = 0; i < list.size() && startAt == -1; i++)
+            for (int i = 0; i < list.size() && startAt == -1; i++) {
                 if (list.get(i).getArrivalTime() <= currentTime)
                     startAt = i;
-            if (startAt == -1) {
+            }
+
+            if (startAt == -1) {    // no job found
                 output += " idle";
                 currentTime++;
-            } else {
+            }
+            else {  // job found, run RR on jobs with the same priority
 
-                boolean finished = false;
-                endAt = startAt;
-                Process firstProcess = list.get(startAt);
-                Process lastProcess = list.get(endAt);
-                Process currentProcess = firstProcess;
+                int priority = list.get(startAt).getPriority();
+                int currentJob = startAt;
+                boolean RRfinished = false;
 
-                while (!finished) {
+                while (!RRfinished) {
 
-                    if (currentProcess.getStartTime() == -1) {
-                        currentProcess.setStartTime(currentTime);
+                    Process p = list.get(currentJob);
+                    p.setRunTime(p.getRunTime() - 1);
+                    output += " P" + p.getName();
+
+                    // current job has not yet started
+                    if (list.get(currentJob).getStartTime() == -1) {
+                        list.get(currentJob).setStartTime(currentTime);
                     }
-                    output += " P" + currentProcess.getName();
-                    currentProcess.setRunTime(currentProcess.getRunTime() - 1);
 
-                    // current process finishes
-                    if (currentProcess.getRunTime() <= 0) {
+                    // current job has finished
+                    if (list.get(currentJob).getRunTime() <= 0) {
 
-                        totalWaitTime += currentTime - currentProcess.getArrivalTime() - currentProcess.getOriginalRunTime() + 1;
-                        totalResponseTime += currentTime - currentProcess.getStartTime() + 1;
-                        totalTurnaroundTime += currentTime - currentProcess.getArrivalTime() + 1;
+                        if (startAt >= list.size() - 1 ||
+                                list.get(startAt).getPriority() != priority ||
+                                list.get(startAt).getArrivalTime() > currentTime) {
+                            RRfinished = true;
+                        }
+
+                        list.remove(currentJob);
+
+                        totalWaitTime += currentTime - p.getArrivalTime() - p.getOriginalRunTime() + 1;
+                        totalResponseTime += currentTime - p.getStartTime() + 1;
+                        totalTurnaroundTime += currentTime - p.getArrivalTime() + 1;
                         throughput++;
-                        System.out.println("here\n" + totalWaitTime + " " + totalResponseTime + " " + totalTurnaroundTime + " " + throughput);
-
-                        int currentIndex = list.indexOf(currentProcess);
-
-                        if (firstProcess == lastProcess)
-                            finished = true;
-                        else if (firstProcess == currentProcess) {
-                            firstProcess = list.get(currentIndex + 1);
-                        }
-                        else if (lastProcess == firstProcess) {
-                            lastProcess = list.get(currentIndex - 1);
-                        }
-
-                        list.remove(currentIndex);
                     }
+
+                    // search for next process
+                    if (!RRfinished) {
+                        if (currentJob >= list.size() - 1) {
+                            currentJob = startAt;
+                        }
+                        else {
+                            if (list.get(currentJob + 1).getPriority() == priority &&
+                                    list.get(currentJob + 1).getArrivalTime() <= currentTime) {
+                                currentJob++;
+                            }
+                            else {
+                                currentJob = startAt;
+                            }
+                        }
+                    }
+
                     currentTime++;
                     if (currentTime == 100) {
-                        System.out.println("done = true");
                         done = true;
-                        int i = list.size();
-                        while (i >= 0) {
-                            if (i < list.indexOf(firstProcess) && i > list.indexOf(lastProcess)) {
+                        Process current_p = list.get(currentJob);
+
+                        // delete not yet started jobs
+                        for (int i = list.size() - 1; i >= 0; i--) {
+                            if (list.get(i).getStartTime() == -1 && list.get(i) != current_p)
                                 list.remove(i);
-                            }
-                            i--;
-                            System.out.println(i);
                         }
-                    }
-                    if (!finished) {
-                        // update last process
-                        if (list.indexOf(lastProcess) != list.size() - 1 && list.get(list.indexOf(lastProcess) + 1).getArrivalTime() <= currentTime)
-                            lastProcess = list.get(list.indexOf(lastProcess) + 1);
-                        //update current process
-                        System.out.println("current = " + list.indexOf(currentProcess) + " last = " + list.indexOf(lastProcess));
-                        if (currentProcess == lastProcess)
-                            currentProcess = firstProcess;
-                        else
-                            currentProcess = list.get(list.indexOf(currentProcess) + 1);
+
+                        // update startAt and currentJob
+                        startAt = 0;
+                        currentJob = list.indexOf(current_p);
                     }
                 }
             }
