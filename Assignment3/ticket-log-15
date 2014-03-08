@@ -1,0 +1,466 @@
+queue len: 15
+0:00 |  customer 11 arrives to seller 8 and waits
+0:00 |  seller 8 start handling customer 11
+0:00 |  seller 8 got ticket (9, 0) for customer 11
+0:01 |  customer 1 arrives to seller 2 and waits
+0:01 |  seller 2 start handling customer 1
+0:01 |  seller 2 got ticket (5, 0) for customer 1
+0:03 |  customer 5 arrives to seller 0 and waits
+0:03 |  customer 7 arrives to seller 0 and waits
+0:03 |  seller 0 start handling customer 5
+0:03 |  seller 0 got ticket (0, 0) for customer 5
+0:03 |  customer 7 arrives to seller 2 and waits
+0:03 |  customer 4 arrives to seller 6 and waits
+0:03 |  seller 6 start handling customer 4
+0:03 |  seller 6 got ticket (9, 1) for customer 4
+0:03 |  customer 5 arrives to seller 8 and waits
+0:03 |  customer 2 arrives to seller 9 and waits
+0:03 |  seller 9 start handling customer 2
+0:03 |  seller 9 got ticket (9, 2) for customer 2
+0:03 |  customer 11 arrives to seller 9 and waits
+0:04 |  seller 0 finishes with customer 5
+0:04 |  seller 0 start handling customer 7
+0:04 |  seller 0 got ticket (0, 1) for customer 7
+0:04 |  customer 7 arrives to seller 3 and waits
+0:04 |  seller 3 start handling customer 7
+0:04 |  seller 3 got ticket (5, 1) for customer 7
+0:04 |  customer 1 arrives to seller 8 and waits
+0:05 |  seller 0 finishes with customer 7
+0:05 |  seller 2 finishes with customer 1
+0:05 |  seller 2 start handling customer 7
+0:05 |  seller 2 got ticket (5, 2) for customer 7
+0:05 |  customer 2 arrives to seller 3 and waits
+0:05 |  customer 9 arrives to seller 3 and waits
+0:05 |  customer 7 arrives to seller 5 and waits
+0:05 |  seller 5 start handling customer 7
+0:05 |  seller 5 got ticket (9, 3) for customer 7
+0:06 |  customer 0 arrives to seller 1 and waits
+0:06 |  seller 1 start handling customer 0
+0:06 |  seller 1 got ticket (5, 3) for customer 0
+0:06 |  customer 4 arrives to seller 4 and waits
+0:06 |  seller 4 start handling customer 4
+0:06 |  seller 4 got ticket (9, 4) for customer 4
+0:06 |  seller 8 finishes with customer 11
+0:06 |  seller 8 start handling customer 5
+0:06 |  seller 8 got ticket (9, 5) for customer 5
+0:07 |  seller 6 finishes with customer 4
+0:07 |  customer 0 arrives to seller 8 and waits
+0:08 |  seller 1 finishes with customer 0
+0:08 |  seller 2 finishes with customer 7
+0:08 |  seller 3 finishes with customer 7
+0:08 |  seller 3 start handling customer 2
+0:08 |  seller 3 got ticket (5, 4) for customer 2
+0:08 |  customer 4 arrives to seller 8 and waits
+0:08 |  customer 5 arrives to seller 9 and waits
+0:09 |  customer 0 arrives to seller 2 and waits
+0:09 |  seller 2 start handling customer 0
+0:09 |  seller 2 got ticket (5, 5) for customer 0
+0:09 |  customer 8 arrives to seller 3 and waits
+0:09 |  seller 9 finishes with customer 2
+0:09 |  seller 9 start handling customer 11
+0:09 |  seller 9 got ticket (9, 6) for customer 11
+0:10 |  customer 2 arrives to seller 2 and waits
+0:10 |  customer 0 arrives to seller 6 and waits
+0:10 |  seller 6 start handling customer 0
+0:10 |  seller 6 got ticket (9, 7) for customer 0
+0:10 |  seller 5 finishes with customer 7
+0:10 |  customer 3 arrives to seller 7 and waits
+0:10 |  seller 7 start handling customer 3
+0:10 |  seller 7 got ticket (9, 8) for customer 3
+0:10 |  customer 6 arrives to seller 7 and waits
+0:11 |  customer 2 arrives to seller 1 and waits
+0:11 |  seller 1 start handling customer 2
+0:11 |  seller 1 got ticket (5, 6) for customer 2
+0:11 |  seller 3 finishes with customer 2
+0:11 |  seller 3 start handling customer 9
+0:11 |  seller 3 got ticket (5, 7) for customer 9
+0:11 |  customer 9 arrives to seller 6 and waits
+0:11 |  customer 14 arrives to seller 9 and waits
+0:12 |  customer 3 arrives to seller 1 and waits
+0:12 |  seller 2 finishes with customer 0
+0:12 |  seller 2 start handling customer 2
+0:12 |  seller 2 got ticket (5, 8) for customer 2
+0:12 |  seller 4 finishes with customer 4
+0:12 |  customer 4 arrives to seller 5 and waits
+0:12 |  seller 5 start handling customer 4
+0:12 |  seller 5 got ticket (9, 9) for customer 4
+0:12 |  customer 2 arrives to seller 6 and waits
+0:12 |  customer 2 arrives to seller 7 and waits
+0:12 |  customer 7 arrives to seller 7 and waits
+0:12 |  seller 8 finishes with customer 5
+0:12 |  seller 8 start handling customer 1
+0:12 |  seller 8 got ticket (8, 0) for customer 1
+0:13 |  customer 8 arrives to seller 1 and waits
+0:13 |  seller 1 finishes with customer 2
+0:13 |  seller 1 start handling customer 3
+0:13 |  seller 1 got ticket (5, 9) for customer 3
+0:13 |  customer 0 arrives to seller 5 and waits
+0:13 |  customer 0 arrives to seller 9 and waits
+0:13 |  seller 9 finishes with customer 11
+0:13 |  seller 9 start handling customer 5
+0:13 |  seller 9 got ticket (8, 1) for customer 5
+0:14 |  customer 8 arrives to seller 0 and waits
+0:14 |  seller 0 start handling customer 8
+0:14 |  seller 0 got ticket (0, 2) for customer 8
+0:14 |  seller 2 finishes with customer 2
+0:14 |  customer 1 arrives to seller 7 and waits
+0:14 |  seller 7 finishes with customer 3
+0:14 |  seller 7 start handling customer 6
+0:14 |  seller 7 got ticket (8, 2) for customer 6
+0:15 |  customer 9 arrives to seller 1 and waits
+0:15 |  seller 1 finishes with customer 3
+0:15 |  seller 1 start handling customer 8
+0:15 |  seller 1 got ticket (3, 0) for customer 8
+0:15 |  customer 9 arrives to seller 4 and waits
+0:15 |  seller 4 start handling customer 9
+0:15 |  seller 4 got ticket (8, 3) for customer 9
+0:15 |  seller 3 finishes with customer 9
+0:15 |  seller 3 start handling customer 8
+0:15 |  seller 3 got ticket (3, 1) for customer 8
+0:15 |  customer 1 arrives to seller 7 and waits
+0:16 |  seller 0 finishes with customer 8
+0:16 |  customer 0 arrives to seller 2 and waits
+0:16 |  seller 2 start handling customer 0
+0:16 |  seller 2 got ticket (3, 2) for customer 0
+0:17 |  customer 2 arrives to seller 5 and waits
+0:17 |  seller 6 finishes with customer 0
+0:17 |  seller 6 start handling customer 9
+0:17 |  seller 6 got ticket (8, 4) for customer 9
+0:17 |  seller 8 finishes with customer 1
+0:17 |  seller 8 start handling customer 0
+0:17 |  seller 8 got ticket (8, 5) for customer 0
+0:18 |  customer 4 arrives to seller 3 and waits
+0:18 |  customer 1 arrives to seller 5 and waits
+0:18 |  customer 3 arrives to seller 5 and waits
+0:18 |  seller 5 finishes with customer 4
+0:18 |  seller 5 start handling customer 0
+0:18 |  seller 5 got ticket (8, 6) for customer 0
+0:18 |  customer 0 arrives to seller 7 and waits
+0:18 |  customer 1 arrives to seller 9 and waits
+0:18 |  seller 9 finishes with customer 5
+0:18 |  seller 9 start handling customer 14
+0:18 |  seller 9 got ticket (8, 7) for customer 14
+0:19 |  seller 1 finishes with customer 8
+0:19 |  seller 1 start handling customer 9
+0:19 |  seller 1 got ticket (3, 3) for customer 9
+0:19 |  customer 0 arrives to seller 4 and waits
+0:19 |  seller 4 finishes with customer 9
+0:19 |  seller 3 finishes with customer 8
+0:19 |  seller 3 start handling customer 4
+0:19 |  seller 3 got ticket (3, 4) for customer 4
+0:19 |  seller 4 start handling customer 0
+0:19 |  seller 4 got ticket (8, 8) for customer 0
+0:19 |  customer 3 arrives to seller 8 and waits
+0:20 |  customer 6 arrives to seller 0 and waits
+0:20 |  seller 0 start handling customer 6
+0:20 |  seller 0 got ticket (0, 3) for customer 6
+0:20 |  customer 4 arrives to seller 2 and waits
+0:20 |  seller 2 finishes with customer 0
+0:20 |  seller 2 start handling customer 4
+0:20 |  seller 2 got ticket (3, 5) for customer 4
+0:21 |  seller 0 finishes with customer 6
+0:21 |  customer 3 arrives to seller 4 and waits
+0:21 |  customer 3 arrives to seller 4 and waits
+0:21 |  customer 3 arrives to seller 5 and waits
+0:21 |  customer 1 arrives to seller 6 and waits
+0:21 |  seller 7 finishes with customer 6
+0:21 |  seller 7 start handling customer 2
+0:21 |  seller 7 got ticket (8, 9) for customer 2
+0:21 |  customer 7 arrives to seller 8 and waits
+0:22 |  customer 3 arrives to seller 2 and waits
+0:22 |  seller 2 finishes with customer 4
+0:22 |  seller 2 start handling customer 3
+0:22 |  seller 2 got ticket (3, 6) for customer 3
+0:22 |  seller 1 finishes with customer 9
+0:22 |  seller 5 finishes with customer 0
+0:22 |  seller 5 start handling customer 2
+0:22 |  seller 5 got ticket (7, 0) for customer 2
+0:22 |  seller 8 finishes with customer 0
+0:22 |  seller 8 start handling customer 4
+0:22 |  seller 8 got ticket (7, 1) for customer 4
+0:23 |  customer 1 arrives to seller 0 and waits
+0:23 |  seller 0 start handling customer 1
+0:23 |  seller 0 got ticket (0, 4) for customer 1
+0:23 |  seller 3 finishes with customer 4
+0:23 |  seller 6 finishes with customer 9
+0:23 |  seller 6 start handling customer 2
+0:23 |  seller 6 got ticket (7, 2) for customer 2
+0:23 |  seller 9 finishes with customer 14
+0:23 |  seller 9 start handling customer 0
+0:23 |  seller 9 got ticket (7, 3) for customer 0
+0:24 |  customer 0 arrives to seller 3 and waits
+0:24 |  seller 3 start handling customer 0
+0:24 |  seller 3 got ticket (3, 7) for customer 0
+0:24 |  seller 4 finishes with customer 0
+0:24 |  seller 4 start handling customer 3
+0:24 |  seller 4 got ticket (7, 4) for customer 3
+0:24 |  customer 8 arrives to seller 8 and waits
+0:24 |  customer 9 arrives to seller 9 and waits
+0:25 |  seller 0 finishes with customer 1
+0:25 |  customer 5 arrives to seller 1 and waits
+0:25 |  seller 1 start handling customer 5
+0:25 |  seller 1 got ticket (3, 8) for customer 5
+0:25 |  customer 5 arrives to seller 2 and waits
+0:25 |  customer 1 arrives to seller 4 and waits
+0:25 |  customer 5 arrives to seller 4 and waits
+0:25 |  customer 5 arrives to seller 7 and waits
+0:26 |  seller 2 finishes with customer 3
+0:26 |  seller 2 start handling customer 5
+0:26 |  seller 2 got ticket (3, 9) for customer 5
+0:26 |  seller 3 finishes with customer 0
+0:26 |  customer 8 arrives to seller 6 and waits
+0:26 |  customer 4 arrives to seller 7 and waits
+0:27 |  customer 1 arrives to seller 3 and waits
+0:27 |  seller 3 start handling customer 1
+0:27 |  seller 3 got ticket (6, 0) for customer 1
+0:27 |  seller 5 finishes with customer 2
+0:27 |  seller 5 start handling customer 1
+0:27 |  seller 5 got ticket (7, 5) for customer 1
+0:27 |  customer 4 arrives to seller 7 and waits
+0:27 |  seller 8 finishes with customer 4
+0:27 |  seller 8 start handling customer 3
+0:27 |  seller 8 got ticket (7, 6) for customer 3
+0:28 |  seller 1 finishes with customer 5
+0:28 |  customer 8 arrives to seller 2 and waits
+0:28 |  customer 1 arrives to seller 3 and waits
+0:28 |  seller 2 finishes with customer 5
+0:28 |  seller 2 start handling customer 8
+0:28 |  seller 2 got ticket (6, 1) for customer 8
+0:28 |  customer 8 arrives to seller 4 and waits
+0:28 |  seller 7 finishes with customer 2
+0:28 |  seller 7 start handling customer 7
+0:28 |  seller 7 got ticket (7, 7) for customer 7
+0:28 |  seller 9 finishes with customer 0
+0:28 |  seller 9 start handling customer 1
+0:28 |  seller 9 got ticket (7, 8) for customer 1
+0:29 |  customer 7 arrives to seller 6 and waits
+0:29 |  seller 6 finishes with customer 2
+0:29 |  seller 6 start handling customer 1
+0:29 |  seller 6 got ticket (7, 9) for customer 1
+0:29 |  customer 2 arrives to seller 8 and waits
+0:30 |  customer 4 arrives to seller 1 and waits
+0:30 |  seller 1 start handling customer 4
+0:30 |  seller 1 got ticket (6, 2) for customer 4
+0:30 |  customer 1 arrives to seller 4 and waits
+0:30 |  customer 2 arrives to seller 7 and waits
+0:30 |  customer 8 arrives to seller 7 and waits
+0:30 |  customer 4 arrives to seller 8 and waits
+0:30 |  customer 8 arrives to seller 9 and waits
+0:31 |  seller 3 finishes with customer 1
+0:31 |  seller 3 start handling customer 1
+0:31 |  seller 3 got ticket (6, 3) for customer 1
+0:31 |  seller 4 finishes with customer 3
+0:31 |  seller 4 start handling customer 3
+0:31 |  seller 4 got ticket (6, 4) for customer 3
+0:31 |  customer 2 arrives to seller 8 and waits
+0:31 |  customer 6 arrives to seller 8 and waits
+0:31 |  customer 4 arrives to seller 9 and waits
+0:32 |  seller 2 finishes with customer 8
+0:32 |  seller 5 finishes with customer 1
+0:32 |  seller 5 start handling customer 3
+0:32 |  seller 5 got ticket (6, 5) for customer 3
+0:32 |  customer 1 arrives to seller 8 and waits
+0:32 |  customer 0 arrives to seller 9 and waits
+0:33 |  customer 1 arrives to seller 1 and waits
+0:33 |  customer 2 arrives to seller 4 and waits
+0:33 |  customer 2 arrives to seller 6 and waits
+0:33 |  seller 8 finishes with customer 3
+0:33 |  seller 8 start handling customer 7
+0:33 |  seller 8 got ticket (6, 6) for customer 7
+0:34 |  seller 1 finishes with customer 4
+0:34 |  seller 1 start handling customer 1
+0:34 |  seller 1 got ticket (6, 7) for customer 1
+0:34 |  customer 3 arrives to seller 6 and waits
+0:34 |  customer 0 arrives to seller 8 and waits
+0:34 |  seller 7 finishes with customer 7
+0:34 |  seller 7 start handling customer 1
+0:34 |  seller 7 got ticket (6, 8) for customer 1
+0:35 |  customer 2 arrives to seller 0 and waits
+0:35 |  seller 0 start handling customer 2
+0:35 |  seller 0 got ticket (0, 5) for customer 2
+0:35 |  customer 1 arrives to seller 2 and waits
+0:35 |  seller 2 start handling customer 1
+0:35 |  seller 2 got ticket (6, 9) for customer 1
+0:35 |  customer 3 arrives to seller 3 and waits
+0:35 |  customer 5 arrives to seller 3 and waits
+0:35 |  seller 3 finishes with customer 1
+0:35 |  seller 3 start handling customer 3
+0:35 |  seller 3 got ticket (2, 0) for customer 3
+0:35 |  customer 5 arrives to seller 5 and waits
+0:35 |  customer 3 arrives to seller 6 and waits
+0:35 |  seller 4 finishes with customer 3
+0:35 |  seller 4 start handling customer 1
+0:35 |  seller 4 got ticket (4, 0) for customer 1
+0:35 |  customer 3 arrives to seller 7 and waits
+0:35 |  seller 6 finishes with customer 1
+0:35 |  seller 6 start handling customer 8
+0:35 |  seller 6 got ticket (4, 1) for customer 8
+0:35 |  seller 9 finishes with customer 1
+0:35 |  seller 9 start handling customer 9
+0:35 |  seller 9 got ticket (4, 2) for customer 9
+0:36 |  seller 0 finishes with customer 2
+0:36 |  customer 2 arrives to seller 2 and waits
+0:36 |  customer 0 arrives to seller 7 and waits
+0:36 |  customer 4 arrives to seller 9 and waits
+0:37 |  seller 2 finishes with customer 1
+0:37 |  seller 2 start handling customer 2
+0:37 |  seller 2 got ticket (2, 1) for customer 2
+0:37 |  seller 5 finishes with customer 3
+0:37 |  seller 5 start handling customer 3
+0:37 |  seller 5 got ticket (4, 3) for customer 3
+0:38 |  seller 1 finishes with customer 1
+0:38 |  seller 8 finishes with customer 7
+0:38 |  seller 8 start handling customer 8
+0:38 |  seller 8 got ticket (4, 4) for customer 8
+0:39 |  seller 2 finishes with customer 2
+0:39 |  customer 4 arrives to seller 3 and waits
+0:39 |  seller 3 finishes with customer 3
+0:39 |  seller 3 start handling customer 5
+0:39 |  seller 3 got ticket (2, 2) for customer 5
+0:39 |  customer 8 arrives to seller 5 and waits
+0:39 |  customer 5 arrives to seller 6 and waits
+0:39 |  seller 4 finishes with customer 1
+0:39 |  seller 4 start handling customer 5
+0:39 |  seller 4 got ticket (4, 5) for customer 5
+0:39 |  seller 7 finishes with customer 1
+0:39 |  seller 7 start handling customer 1
+0:39 |  seller 7 got ticket (4, 6) for customer 1
+0:40 |  customer 2 arrives to seller 3 and waits
+0:40 |  customer 4 arrives to seller 4 and waits
+0:40 |  customer 3 arrives to seller 9 and waits
+0:41 |  customer 7 arrives to seller 1 and waits
+0:41 |  seller 1 start handling customer 7
+0:41 |  seller 1 got ticket (2, 3) for customer 7
+0:41 |  customer 2 arrives to seller 4 and waits
+0:41 |  customer 9 arrives to seller 7 and waits
+0:41 |  seller 9 finishes with customer 9
+0:41 |  seller 9 start handling customer 8
+0:41 |  seller 9 got ticket (4, 7) for customer 8
+0:42 |  seller 3 finishes with customer 5
+0:42 |  seller 3 start handling customer 4
+0:42 |  seller 3 got ticket (2, 4) for customer 4
+0:42 |  customer 2 arrives to seller 5 and waits
+0:42 |  customer 4 arrives to seller 6 and waits
+0:42 |  seller 6 finishes with customer 8
+0:42 |  seller 6 start handling customer 7
+0:42 |  seller 6 got ticket (4, 8) for customer 7
+0:43 |  seller 4 finishes with customer 5
+0:43 |  seller 4 start handling customer 8
+0:43 |  seller 4 got ticket (4, 9) for customer 8
+0:43 |  customer 2 arrives to seller 9 and waits
+0:43 |  customer 6 arrives to seller 9 and waits
+0:44 |  seller 1 finishes with customer 7
+0:44 |  customer 3 arrives to seller 2 and waits
+0:44 |  seller 2 start handling customer 3
+0:44 |  seller 2 got ticket (2, 5) for customer 3
+0:44 |  seller 3 finishes with customer 4
+0:44 |  seller 3 start handling customer 2
+0:44 |  seller 3 got ticket (2, 6) for customer 2
+0:44 |  seller 5 finishes with customer 3
+0:44 |  seller 5 start handling customer 5
+0:44 |  seller 5 got ticket (2, 7) for customer 5
+0:44 |  seller 7 finishes with customer 1
+0:44 |  seller 7 start handling customer 0
+0:44 |  seller 7 got ticket (2, 8) for customer 0
+0:45 |  customer 0 arrives to seller 4 and waits
+0:45 |  customer 1 arrives to seller 5 and waits
+0:45 |  seller 8 finishes with customer 8
+0:45 |  seller 8 start handling customer 2
+0:45 |  seller 8 got ticket (2, 9) for customer 2
+0:45 |  seller 9 finishes with customer 8
+0:45 |  seller 9 start handling customer 4
+0:45 |  seller 9 got ticket (1, 0) for customer 4
+0:46 |  customer 1 arrives to seller 1 and waits
+0:46 |  seller 1 start handling customer 1
+0:46 |  seller 1 got ticket (1, 1) for customer 1
+0:46 |  customer 6 arrives to seller 1 and waits
+0:46 |  seller 2 finishes with customer 3
+0:46 |  customer 3 arrives to seller 3 and waits
+0:46 |  customer 6 arrives to seller 4 and waits
+0:46 |  customer 6 arrives to seller 5 and waits
+0:46 |  seller 3 finishes with customer 2
+0:46 |  seller 3 start handling customer 3
+0:46 |  seller 3 got ticket (1, 2) for customer 3
+0:46 |  seller 6 finishes with customer 7
+0:46 |  seller 6 start handling customer 2
+0:46 |  seller 6 got ticket (1, 3) for customer 2
+0:47 |  customer 0 arrives to seller 0 and waits
+0:47 |  seller 0 start handling customer 0
+0:47 |  seller 0 got ticket (0, 6) for customer 0
+0:47 |  customer 10 arrives to seller 9 and waits
+0:48 |  seller 0 finishes with customer 0
+0:48 |  customer 6 arrives to seller 2 and waits
+0:48 |  seller 2 start handling customer 6
+0:48 |  seller 2 got ticket (1, 4) for customer 6
+0:48 |  customer 0 arrives to seller 5 and waits
+0:48 |  seller 3 finishes with customer 3
+0:48 |  seller 4 finishes with customer 8
+0:48 |  seller 4 start handling customer 1
+0:48 |  seller 4 got ticket (1, 5) for customer 1
+0:48 |  customer 7 arrives to seller 9 and waits
+0:48 |  customer 12 arrives to seller 9 and waits
+0:49 |  customer 4 arrives to seller 0 and waits
+0:49 |  seller 0 start handling customer 4
+0:49 |  seller 0 got ticket (0, 7) for customer 4
+0:50 |  customer 3 arrives to seller 0 and waits
+0:50 |  customer 0 arrives to seller 1 and waits
+0:50 |  seller 1 finishes with customer 1
+0:50 |  seller 1 start handling customer 6
+0:50 |  seller 1 got ticket (1, 6) for customer 6
+0:50 |  customer 1 arrives to seller 6 and waits
+0:51 |  seller 0 finishes with customer 4
+0:51 |  seller 0 start handling customer 3
+0:51 |  seller 0 got ticket (0, 8) for customer 3
+0:51 |  customer 4 arrives to seller 1 and waits
+0:51 |  customer 4 arrives to seller 2 and waits
+0:51 |  customer 6 arrives to seller 6 and waits
+0:51 |  seller 5 finishes with customer 5
+0:51 |  seller 5 start handling customer 8
+0:51 |  seller 5 got ticket (1, 7) for customer 8
+0:51 |  seller 6 finishes with customer 2
+0:51 |  seller 6 start handling customer 3
+0:51 |  seller 6 got ticket (1, 8) for customer 3
+0:51 |  seller 7 finishes with customer 0
+0:51 |  seller 7 start handling customer 5
+0:51 |  seller 7 got ticket (1, 9) for customer 5
+0:51 |  seller 9 finishes with customer 4
+0:51 |  seller 9 start handling customer 0
+0:51 |  seller 9 got ticket (0, 9) for customer 0
+0:52 |  seller 2 finishes with customer 6
+0:52 |  seller 2 start handling customer 4
+0:52 |  seller 2 found tickets sold out, customer 4 leaves
+0:52 |  customer 6 arrives to seller 3 and waits
+0:52 |  seller 3 start handling customer 6
+0:52 |  seller 3 found tickets sold out, customer 6 leaves
+0:52 |  customer 0 arrives to seller 6 and waits
+0:52 |  seller 8 finishes with customer 2
+0:53 |  seller 0 finishes with customer 3
+0:54 |  customer 9 arrives to seller 0 and waits
+0:54 |  seller 1 finishes with customer 6
+0:54 |  customer 9 arrives to seller 2 and waits
+0:54 |  customer 7 arrives to seller 4 and waits
+0:54 |  customer 3 arrives to seller 9 and waits
+0:55 |  customer 9 arrives to seller 5 and waits
+0:55 |  seller 4 finishes with customer 1
+0:55 |  seller 6 finishes with customer 3
+0:56 |  customer 2 arrives to seller 1 and waits
+0:56 |  customer 4 arrives to seller 5 and waits
+0:56 |  seller 7 finishes with customer 5
+0:56 |  seller 9 finishes with customer 0
+0:57 |  customer 3 arrives to seller 1 and waits
+0:57 |  customer 9 arrives to seller 8 and waits
+0:57 |  seller 5 finishes with customer 8
+0:58 |  customer 0 arrives to seller 3 and waits
+0:58 |  customer 13 arrives to seller 9 and waits
+0:59 |  customer 3 arrives to seller 8 and waits
+0:59 |  00: H005 H007 H008 H006 H001 H002 H000 H004 H003 L600
+0:59 |  01: L604 M101 M303 L302 M206 L101 M106 L208 L303 L405
+0:59 |  02: M303 M202 M305 M107 M304 M203 M302 L205 L400 L502
+0:59 |  03: M108 M308 M200 M109 M304 M204 M203 M300 M105 M205
+0:59 |  04: L101 L308 L609 L203 L508 L105 L401 L608 L307 L108
+0:59 |  05: M201 M307 M207 M100 M302 M200 M102 M309 M202 M103
+0:59 |  06: M301 M208 M104 M301 L103 L203 L507 M101 L401 M201
+0:59 |  07: L202 L504 L302 L600 L103 L201 L503 L407 L601 L301
+0:59 |  08: L501 L605 L406 L109 L309 L500 L200 L614 L100 L402
+0:59 |  09: L511 L304 L602 L207 L104 L505 L611 L300 L403 L204
+
