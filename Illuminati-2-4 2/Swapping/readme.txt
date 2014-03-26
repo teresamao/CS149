@@ -1,1 +1,0 @@
-The first column indicates current time in second. 
