@@ -13,6 +13,12 @@ public class Process implements Cloneable {
         this.name = generateName(name);
     }
 
+    public Process(String name, int size, int time) {
+    	this.name = name;
+    	this.size = size;
+    	this.time = time;
+    }
+
     private String generateName(int num) {
         String name = "";
         for (int i = 0; i < this.size; i++) {
@@ -30,12 +36,7 @@ public class Process implements Cloneable {
     }
 
     public Process clone() {
-        try {
-            return (Process) super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
+        return new Process(name, size, time);
     }
 
     public String getName() {
