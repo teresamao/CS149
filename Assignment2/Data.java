@@ -31,4 +31,20 @@ public class Data {
     public int getThroughput() {
         return throughput;
     }
+
+    public void setAverageTurnaround(double averageTurnaround) {
+        this.averageTurnaround = averageTurnaround;
+    }
+
+    public void setAverageWaiting(double averageWaiting) {
+        this.averageWaiting = averageWaiting;
+    }
+
+    public void setAverageResponse(double averageResponse) {
+        this.averageResponse = averageResponse;
+    }
+
+    public void setThroughput(int throughput) {
+        this.throughput = throughput;
+    }
 }
