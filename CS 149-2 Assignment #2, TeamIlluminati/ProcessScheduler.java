@@ -8,18 +8,18 @@ public class ProcessScheduler {
 
         ArrayList<Process> plist;
 
-        plist = ProcessManager.generateProcesses(45);
-        FCFS(plist);
-        plist = ProcessManager.generateProcesses(45);
-        SJF(plist);
+        //plist = ProcessManager.generateProcesses(45);
+        //FCFS(plist);
+        //plist = ProcessManager.generateProcesses(25);
+        //SJF(plist);
         plist = ProcessManager.generateProcesses(45);
         nonpreemptiveHPF(plist);
-        plist = ProcessManager.generateProcesses(45);
-        RR(plist);
-        plist = ProcessManager.generateProcesses(45);
-        SRF(plist);
-        plist = ProcessManager.generateProcesses(45);
-        preemptiveHPF(plist);
+        //plist = ProcessManager.generateProcesses(45);
+        //RR(plist);
+        //plist = ProcessManager.generateProcesses(45);
+        //SRF(plist);
+        //plist = ProcessManager.generateProcesses(45);
+        //preemptiveHPF(plist);
 
 	}
 
@@ -36,6 +36,8 @@ public class ProcessScheduler {
 
         // sorts process list according to scheduling type
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
+        ProcessManager.printProcessList(list);
+
 
         // starts processing
         while (finishTime < 100) {
@@ -98,7 +100,7 @@ public class ProcessScheduler {
         String output = "SJF ";
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
-//        ProcessManager.printProcessList(list);
+        ProcessManager.printProcessList(list);
 
         while (finishTime < 100  && startTime < 100) {
 
@@ -168,6 +170,7 @@ public class ProcessScheduler {
         String output = "HPF ";
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
+        ProcessManager.printProcessList(list);
 
         while (finishTime < 100  && startTime < 100) {
 
@@ -307,7 +310,7 @@ public class ProcessScheduler {
         int currentJob = 0;
 
         Collections.sort(list, ProcessComparators.arrivalTimeComparator);
-        ProcessManager.printProcessList(list);
+       // ProcessManager.printProcessList(list);
 
         while (currentTime < 100) {
 
